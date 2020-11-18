@@ -32,6 +32,10 @@ public class Main {
     fillArray(randomInts, 1000);
     System.out.println("randomInts MIN: " + findMin(randomInts));
     System.out.println("randomInts MAX: " + findMax(randomInts));
+
+    int[] intsArray = {2, 2, 2, 1, 2, 3, 10, 1};
+    boolean arrayBalanceResult = isArrayBalanced(intsArray);
+    System.out.println("Array is " + (arrayBalanceResult ? "balanced!" : "is not balanced!"));
   }
 
   private static void convertIntsArray(int[] ints) {
@@ -101,6 +105,50 @@ public class Main {
     }
 
     return min;
+  }
+
+  public static boolean isArrayBalanced(int[] ints) {
+    if (ints.length == 0) {
+      System.out.println("Input array is empty");
+      return false;
+    }
+
+    boolean isArrayBalanced = false;
+
+    for (int arrIndex = 0; arrIndex < ints.length; arrIndex++) {
+      if (checkElement(ints, arrIndex)) {
+        isArrayBalanced = true;
+        break;
+      }
+    }
+
+    return isArrayBalanced;
+  }
+
+  private static boolean checkElement(int[] ints, int arrIndex) {
+    return calculateLeftArrayPart(ints, arrIndex) == calculateRightArrayPart(ints, arrIndex + 1);
+  }
+
+  private static int calculateLeftArrayPart(int[] ints, int arrIndex) {
+    int sumResult = ints[arrIndex];
+    for (int index = 0; index < arrIndex; index++) {
+      sumResult += ints[index];
+    }
+
+    return sumResult;
+  }
+
+  private static int calculateRightArrayPart(int[] ints, int arrIndex) {
+    if (arrIndex >= ints.length) {
+      return 0;
+    }
+
+    int sumResult = 0;
+    for (int index = arrIndex; index < ints.length; index++) {
+      sumResult += ints[index];
+    }
+
+    return sumResult;
   }
 }
 
