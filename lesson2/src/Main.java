@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.Random;
 
 public class Main {
   public static void main(String[] args) {
@@ -26,6 +27,11 @@ public class Main {
     };
     replaceDiagonalElements(quadraticMatrix);
     System.out.println(Arrays.deepToString(quadraticMatrix));
+
+    int[] randomInts = new int[1000];
+    fillArray(randomInts, 1000);
+    System.out.println("randomInts MIN: " + findMin(randomInts));
+    System.out.println("randomInts MAX: " + findMax(randomInts));
   }
 
   private static void convertIntsArray(int[] ints) {
@@ -66,6 +72,35 @@ public class Main {
         }
       }
     }
+  }
+
+  private static void fillArray(int[] randomInts, int range) {
+    Random randomizer = new Random();
+    for (int arrIndex = 0; arrIndex < randomInts.length; arrIndex++) {
+      randomInts[arrIndex] = randomizer.nextInt(range);
+    }
+  }
+
+  private static int findMax(int[] randomInts) {
+    int max = randomInts[0];
+    for (int arrIndex = 0; arrIndex < randomInts.length; arrIndex++) {
+      if (max < randomInts[arrIndex]) {
+        max = randomInts[arrIndex];
+      }
+    }
+
+    return max;
+  }
+
+  private static int findMin(int[] randomInts) {
+    int min = randomInts[0];
+    for (int arrIndex = 0; arrIndex < randomInts.length; arrIndex++) {
+      if (min > randomInts[arrIndex]) {
+        min = randomInts[arrIndex];
+      }
+    }
+
+    return min;
   }
 }
 
