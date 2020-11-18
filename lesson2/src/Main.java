@@ -58,11 +58,11 @@ public class Main {
   }
 
   private static void replaceDiagonalElements(int[][] quadraticMatrix) {
-    for (int lineIndex = 0; lineIndex < quadraticMatrix.length; lineIndex++) {
-      for (int rowIndex = 0; rowIndex < quadraticMatrix[lineIndex].length; rowIndex++) {
-        if (lineIndex == rowIndex) {
-          quadraticMatrix[lineIndex][rowIndex] = 1;                                         //Diagonal from left to right
-          quadraticMatrix[lineIndex][quadraticMatrix[lineIndex].length - 1 - rowIndex] = 1; //Diagonal from right to left
+    for (int rowIndex = 0; rowIndex < quadraticMatrix.length; rowIndex++) {
+      for (int columnIndex = 0; columnIndex < quadraticMatrix[rowIndex].length; columnIndex++) {
+        if (rowIndex == columnIndex) {
+          quadraticMatrix[rowIndex][columnIndex] = 1;                                        //Diagonal from left to right
+          quadraticMatrix[rowIndex][quadraticMatrix[rowIndex].length - 1 - columnIndex] = 1; //Diagonal from right to left
         }
       }
     }
