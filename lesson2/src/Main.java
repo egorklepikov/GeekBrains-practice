@@ -83,9 +83,9 @@ public class Main {
 
   private static int findMax(int[] randomInts) {
     int max = randomInts[0];
-    for (int arrIndex = 0; arrIndex < randomInts.length; arrIndex++) {
-      if (max < randomInts[arrIndex]) {
-        max = randomInts[arrIndex];
+    for (int randomInt : randomInts) {
+      if (max < randomInt) {
+        max = randomInt;
       }
     }
 
@@ -94,9 +94,9 @@ public class Main {
 
   private static int findMin(int[] randomInts) {
     int min = randomInts[0];
-    for (int arrIndex = 0; arrIndex < randomInts.length; arrIndex++) {
-      if (min > randomInts[arrIndex]) {
-        min = randomInts[arrIndex];
+    for (int randomInt : randomInts) {
+      if (min > randomInt) {
+        min = randomInt;
       }
     }
 
