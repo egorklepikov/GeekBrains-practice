@@ -29,7 +29,7 @@ public class Main {
     System.out.println(Arrays.deepToString(quadraticMatrix));
 
     int[] randomInts = new int[1000];
-    fillArray(randomInts, 1000);
+    fillArray(randomInts);
     System.out.println("randomInts MIN: " + findMin(randomInts));
     System.out.println("randomInts MAX: " + findMax(randomInts));
 
@@ -82,10 +82,10 @@ public class Main {
     }
   }
 
-  private static void fillArray(int[] randomInts, int range) {
+  private static void fillArray(int[] randomInts) {
     Random randomizer = new Random();
     for (int arrIndex = 0; arrIndex < randomInts.length; arrIndex++) {
-      randomInts[arrIndex] = randomizer.nextInt(range);
+      randomInts[arrIndex] = randomizer.nextInt(300);
     }
   }
 
