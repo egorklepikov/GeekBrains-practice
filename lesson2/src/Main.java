@@ -36,6 +36,10 @@ public class Main {
     int[] intsArray = {2, 2, 2, 1, 2, 3, 10, 1};
     boolean arrayBalanceResult = isArrayBalanced(intsArray);
     System.out.println("Array is " + (arrayBalanceResult ? "balanced!" : "is not balanced!"));
+
+    int[] inputArray = {1, 2, 3};
+    shiftArray(inputArray, 2);
+    System.out.println(Arrays.toString(inputArray));
   }
 
   private static void convertIntsArray(int[] ints) {
@@ -149,6 +153,48 @@ public class Main {
     }
 
     return sumResult;
+  }
+
+  public static void shiftArray(int[] ints, int n) {
+    if (n == 0 || ints.length == 0) {
+      return;
+    }
+
+    int finalN  = Math.abs(n);
+    for (int shiftNumber = 0; shiftNumber < finalN; shiftNumber++) {
+      int buffer = 0;
+      for (int arrIndex = 0; arrIndex < ints.length; arrIndex++) {
+        if (n >= 0) {
+          buffer = moveRight(ints, arrIndex, buffer);
+        } else {
+          buffer = moveLeft(ints, arrIndex, buffer);
+        }
+      }
+    }
+  }
+
+  private static int moveRight(int[] ints, int arrIndex, int buffer) {
+    if (arrIndex == 0) {
+      buffer = ints[arrIndex];
+      ints[arrIndex] = ints[ints.length - 1];
+    } else {
+      int tempBuffer = ints[arrIndex];
+      ints[arrIndex] = buffer;
+      buffer = tempBuffer;
+    }
+    return buffer;
+  }
+
+  private static int moveLeft(int[] ints, int arrIndex, int buffer) {
+    if (arrIndex == 0) {
+      buffer = ints[ints.length - 1];
+      ints[ints.length - 1] = ints[arrIndex];
+    } else {
+      int tempBuffer = ints[ints.length - 1 - arrIndex];
+      ints[ints.length - 1 - arrIndex] = buffer;
+      buffer = tempBuffer;
+    }
+    return buffer;
   }
 }
 
