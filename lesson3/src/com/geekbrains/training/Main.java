@@ -1,6 +1,7 @@
 package com.geekbrains.training;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -28,12 +29,12 @@ public class Main {
   }
 
   private static void playGuessNumber() {
-    printGameRules();
+    printGuessNumbersRules();
     boolean isGameWon = guessNumberGameProcess();
     guessNumberGameResult(isGameWon);
   }
 
-  private static void printGameRules() {
+  private static void printGuessNumbersRules() {
     System.out.println("----------------------------------------------------------------------");
     System.out.println("" +
         "The goal is to guess the number. " +
@@ -95,6 +96,72 @@ public class Main {
   }
 
   private static void playGuessWord() {
+    String[] words = {
+        "apple", "orange", "lemon", "banana", "apricot", "avocado", "broccoli", "carrot", "cherry", "garlic",
+        "grape", "melon", "leak", "kiwi", "mango", "mushroom", "nut", "olive", "pea", "peanut", "pear", "pepper",
+        "pineapple", "pumpkin", "potato"
+    };
 
+    printGuessWordsRules(words);
+    guessWordsGameProcess(words);
+  }
+
+  private static void guessWordsGameProcess(String[] words) {
+    String selectedWord = selectWord(words);
+    String inputWord;
+    do {
+      System.out.print("Enter word: ");
+      inputWord = scanner.nextLine();
+      if (inputWord.equals(selectedWord)) {
+        printGuessWordResult();
+      } else {
+        String hint = getHint(inputWord, selectedWord);
+        showHint(hint);
+      }
+    } while (!inputWord.equals(selectedWord));
+  }
+
+  private static String selectWord(String[] words) {
+    return words[new Random().nextInt(words.length)];
+  }
+
+  private static String getHint(String inputWord, String selectedWord) {
+    StringBuilder stringBuilder = new StringBuilder();
+    for (int selectedCharIndex = 0; selectedCharIndex < selectedWord.length(); selectedCharIndex++) {
+      if (selectedCharIndex < inputWord.length()) {
+        char selectedWordChar = selectedWord.charAt(selectedCharIndex);
+        if (selectedWordChar == inputWord.charAt(selectedCharIndex)) {
+          stringBuilder.append(selectedWordChar);
+        } else {
+          stringBuilder.append('#');
+        }
+      }
+    }
+    addMask(stringBuilder);
+    return stringBuilder.toString().toLowerCase();
+  }
+
+  private static void addMask(StringBuilder stringBuilder) {
+    int stringLength = stringBuilder.length();
+    while (stringLength <= 15) {
+      stringBuilder.append('#');
+      stringLength++;
+    }
+  }
+
+  private static void printGuessWordsRules(String[] words) {
+    System.out.println("-----------------------------------------------------------------------");
+    System.out.println("The goal is to guess one word from the list: " + Arrays.toString(words));
+    System.out.println("-----------------------------------------------------------------------");
+  }
+
+  private static void printGuessWordResult() {
+    System.out.println("-----------------------------------------------------------------------");
+    System.out.println("Congratulations! You did it.");
+    System.out.println("-----------------------------------------------------------------------");
+  }
+
+  private static void showHint(String hint) {
+    System.out.println("Try again. Hint: " + hint);
   }
 }
