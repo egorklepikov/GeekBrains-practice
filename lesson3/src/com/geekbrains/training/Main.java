@@ -12,12 +12,12 @@ public class Main {
     boolean isGameSelected = false;
     while (!isGameSelected) {
       System.out.print("Enter game name: ");
-      switch (scanner.nextLine().toLowerCase()) {
-        case "guess number":
+      switch (scanner.nextLine().toLowerCase().replace(" ", "")) {
+        case "guessnumber":
           isGameSelected = true;
           playGuessNumber();
           break;
-        case "guess word":
+        case "guessword":
           isGameSelected = true;
           playGuessWord();
           break;
