@@ -5,8 +5,8 @@ import java.util.Scanner;
 public class TicTacToe {
   private static final Scanner scanner = new Scanner(System.in);
 
-  private static final int GAME_FIELD_SIZE = 5;
-  private static final int REQUIRED_MATCHES = 4;
+  private static final int GAME_FIELD_SIZE = 9;
+  private static final int REQUIRED_MATCHES = 8;
 
   private static final char CROSS = 'X';
   private static final char ZERO = 'O';
@@ -102,7 +102,7 @@ public class TicTacToe {
     if (crossesCount >= REQUIRED_MATCHES) {
       return true;
     }
-//    crossesCount = moveAdditionalDiagonalUp(element, row, column) + moveAdditionalDiagonalDown(element, row + 1, column + 1);
+    crossesCount = moveAdditionalDiagonalUp(element, row, column) + moveAdditionalDiagonalDown(element, row + 1, column + 1);
     return crossesCount >= REQUIRED_MATCHES;
   }
 
@@ -182,46 +182,37 @@ public class TicTacToe {
     return count;
   }
 
-  /**
-   * -- -- -- -- -- -- --
-   * 1  2  3  4  5  6  7
-   * 1 .  .  .  .  .  .  X
-   * 2 .  .  .  .  .  X  .
-   * 3 .  .  .  .  X  .  .
-   * 4 .  .  X  X  .  .  .
-   * 5 .  .  .  .  .  .  .
-   * 6 .  .  .  .  .  .  .
-   * 7 .  .  .  .  .  .  .
-   * -- -- -- -- -- -- --
-   */
+  private static int moveAdditionalDiagonalUp(char element, int row, int column) {
+    int count = 0;
+    for (; row >= 0; row--) {
+      for (; column < gameField.length; column++) {
+        if (element == gameField[row][column]) {
+          count++;
+        } else {
+          break;
+        }
+      }
+    }
+    return count;
+  }
 
-//  private static int moveAdditionalDiagonalUp(char element, int row, int column) {
-//    int count = 0;
-//    for (; row >= gameField.length; row++) {
-//      for (; column > gameField.length; column++) {
-//        if (element == gameField[row][column]) {
-//          count++;
-//        } else {
-//          break;
-//        }
-//      }
-//    }
-//    return count;
-//  }
+  private static int moveAdditionalDiagonalDown(char element, int row, int column) {
+    int count = 0;
+    if (column == gameField.length) {
+      return 0;
+    }
+    for (; row < gameField.length; row++) {
+      for (; column >= 0; column--) {
+        if (element == gameField[row][column]) {
+          count++;
+        } else {
+          break;
+        }
+      }
+    }
+    return count;
+  }
 
-//  private static int moveAdditionalDiagonalDown(char element, int row, int column) {
-//    int count = 0;
-//    for (; row < gameField.length; row++) {
-//      for (; column >= 0; column--) {
-//        if (element == gameField[row][column]) {
-//          count++;
-//        } else {
-//          break;
-//        }
-//      }
-//    }
-//    return count;
-//  }
   private static boolean isCellValid(int row, int column) {
     if (row < 0 || column < 0 || row > GAME_FIELD_SIZE || column > GAME_FIELD_SIZE) {
       return false;
