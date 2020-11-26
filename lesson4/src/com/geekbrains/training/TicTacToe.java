@@ -5,8 +5,8 @@ import java.util.Scanner;
 public class TicTacToe {
   private static final Scanner scanner = new Scanner(System.in);
 
-  private static final int GAME_FIELD_SIZE = 7;
-  private static final int REQUIRED_MATCHES = 5;
+  private static final int GAME_FIELD_SIZE = 5;
+  private static final int REQUIRED_MATCHES = 4;
 
   private static final char CROSS = 'X';
   private static final char ZERO = 'O';
@@ -31,6 +31,7 @@ public class TicTacToe {
         case 1:
         case -1:
           printGameResult(gameResult);
+          printGameField();
           isGameFinished = true;
           break;
       }
@@ -41,13 +42,18 @@ public class TicTacToe {
    * @return (1 : победил игрок), (-1: победил AI), (0: игра продолжается)
    */
   private static int nextTurn() {
-    playerTurn();
-    printGameField();
-    aiTurn();
-    return checkWinners();
+    int[] turnPlace = playerTurn();
+    int checkWinnersResult = checkWinners(turnPlace[0], turnPlace[1]);
+    if (checkWinnersResult == 0) {
+      turnPlace = aiTurn();
+      printGameField();
+      return checkWinners(turnPlace[0], turnPlace[1]);
+    } else {
+      return checkWinnersResult;
+    }
   }
 
-  private static void playerTurn() {
+  private static int[] playerTurn() {
     int row;
     int column;
     do {
@@ -57,44 +63,29 @@ public class TicTacToe {
       row = scanner.nextInt() - 1;
     } while (!isCellValid(row, column));
     gameField[row][column] = CROSS;
+    return new int[]{row, column};
   }
 
-  private static void aiTurn() {
-
+  private static int[] aiTurn() {
+    return new int[]{0, 0};
   }
 
-  private static int checkWinners() {
-    if (checkCrosses()) {
+  private static int checkWinners(int row, int column) {
+    if (checkCrosses(row, column)) {
       return 1;
-    } else if (checkZeros()) {
+    } else if (checkZeros(row, column)) {
       return -1;
     } else {
       return 0;
     }
   }
 
-  private static boolean checkCrosses() {
-    return checkElements(CROSS);
+  private static boolean checkCrosses(int row, int column) {
+    return checkElement(CROSS, row, column);
   }
 
-  private static boolean checkZeros() {
-    return checkElements(ZERO);
-  }
-
-  private static boolean checkElements(char element) {
-    boolean isWinner = false;
-    for (int rowIndex = 0; rowIndex < GAME_FIELD_SIZE; rowIndex++) {
-      for (int columnIndex = 0; columnIndex < GAME_FIELD_SIZE; columnIndex++) {
-        isWinner = checkElement(element, rowIndex, columnIndex);
-        if (isWinner) {
-          break;
-        }
-      }
-      if (isWinner) {
-        break;
-      }
-    }
-    return isWinner;
+  private static boolean checkZeros(int row, int column) {
+    return checkElement(ZERO, row, column);
   }
 
   private static boolean checkElement(char element, int row, int column) {
@@ -193,7 +184,7 @@ public class TicTacToe {
 
   /**
    * -- -- -- -- -- -- --
-   *   1  2  3  4  5  6  7
+   * 1  2  3  4  5  6  7
    * 1 .  .  .  .  .  .  X
    * 2 .  .  .  .  .  X  .
    * 3 .  .  .  .  X  .  .
@@ -231,7 +222,6 @@ public class TicTacToe {
 //    }
 //    return count;
 //  }
-
   private static boolean isCellValid(int row, int column) {
     if (row < 0 || column < 0 || row > GAME_FIELD_SIZE || column > GAME_FIELD_SIZE) {
       return false;
