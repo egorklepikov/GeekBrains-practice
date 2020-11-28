@@ -82,6 +82,7 @@ public class TicTacToe {
     return new int[]{0, 0};
   }
 
+  @SuppressWarnings("SameParameterValue")
   private static int[] defence(char element, int[] whereToDefence) {
     gameField[whereToDefence[0]][whereToDefence[1]] = element;
     return whereToDefence;
@@ -95,6 +96,7 @@ public class TicTacToe {
     return isDefenceRequired;
   }
 
+  @SuppressWarnings("SameParameterValue")
   private static boolean whereToDefence(int[] whereToDefence, char element, int row, int column) {
     boolean isPlaceFound = checkRow(whereToDefence, element, row, column);
     if (!isPlaceFound) {
@@ -113,7 +115,7 @@ public class TicTacToe {
     int crossesCount;
     crossesCount = countAdditionalDiagonalUp(element, row, column) + countAdditionalDiagonalDown(element, row + 1, column - 1);
     if (crossesCount >= REQUIRED_MATCHES - 2) {
-      int[] upBorder = getUpAdditionalDiagonalBorder(element, row, column);
+      int[] upBorder = getUpAdditionalDiagonalBorder(row, column);
       int[] downBorder = getDownAdditionalDiagonalBorder(element, row, column);
       if (isCellValid(upBorder[0] - 1, upBorder[1] + 1)) {
         whereToDefence[0] = upBorder[0] - 1;
@@ -132,7 +134,7 @@ public class TicTacToe {
     int crossesCount;
     crossesCount = countMainDiagonalUp(element, row, column) + countMainDiagonalDown(element, row + 1, column + 1);
     if (crossesCount >= REQUIRED_MATCHES - 2) {
-      int[] upBorder = getUpMainDiagonalBorder(element, row, column);
+      int[] upBorder = getUpMainDiagonalBorder(row, column);
       int[] downBorder = getDownMainDiagonalBorder(element, row, column);
       if (isCellValid(upBorder[0] - 1, upBorder[1] - 1)) {
         whereToDefence[0] = upBorder[0] - 1;
@@ -171,7 +173,7 @@ public class TicTacToe {
     crossesCount = countUp(element, row, column) + countDown(element, row + 1, column);
     if (crossesCount >= REQUIRED_MATCHES - 2) {
       int upBorder = getUpBorder(element, row, column);
-      int downBorder = getDownBorder(element, row, column);
+      int downBorder = getDownBorder(row, column);
       if (isCellValid(row, upBorder - 1)) {
         whereToDefence[0] = upBorder;
         whereToDefence[1] = column;
@@ -222,6 +224,7 @@ public class TicTacToe {
     return crossesCount >= REQUIRED_MATCHES;
   }
 
+  @SuppressWarnings("SameParameterValue")
   private static int checkElementScore(char element, int row, int column) {
     int crossesCount;
     crossesCount = countRight(element, row, column + 1) + countLeft(element, row, column);
@@ -327,16 +330,16 @@ public class TicTacToe {
     return count;
   }
 
-  private static int getDownBorder(char element, int row, int column) {
-    char currentElement = element;
+  private static int getDownBorder(int row, int column) {
+    char element;
     do {
       row++;
       if (row < gameField.length) {
-        currentElement = gameField[row][column];
+        element = gameField[row][column];
       } else {
         break;
       }
-    } while (currentElement == CROSS);
+    } while (element == CROSS);
     return --row;
   }
 
@@ -383,7 +386,8 @@ public class TicTacToe {
     return count;
   }
 
-  private static int[] getUpMainDiagonalBorder(char element, int row, int column) {
+  private static int[] getUpMainDiagonalBorder(int row, int column) {
+    char element;
     do {
       row--;
       column--;
@@ -414,7 +418,8 @@ public class TicTacToe {
     return count;
   }
 
-  private static int[] getUpAdditionalDiagonalBorder(char element, int row, int column) {
+  private static int[] getUpAdditionalDiagonalBorder(int row, int column) {
+    char element;
     do {
       row--;
       column++;
