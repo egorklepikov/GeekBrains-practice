@@ -1,9 +1,11 @@
 package com.geekbrains.training;
 
+import java.util.Random;
 import java.util.Scanner;
 
 public class TicTacToe {
   private static final Scanner scanner = new Scanner(System.in);
+  private static final Random random = new Random();
 
   private static final int GAME_FIELD_SIZE = 9;
   private static final int REQUIRED_MATCHES = 4;
@@ -79,7 +81,14 @@ public class TicTacToe {
   }
 
   private static int[] attack() {
-    return new int[]{0, 0};
+    int row;
+    int column;
+    do {
+      row = random.nextInt(GAME_FIELD_SIZE);
+      column = random.nextInt(GAME_FIELD_SIZE);
+    } while (!isCellValid(row, column));
+    gameField[row][column] = ZERO;
+    return new int[]{row, column};
   }
 
   @SuppressWarnings("SameParameterValue")
