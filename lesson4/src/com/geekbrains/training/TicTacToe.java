@@ -42,11 +42,11 @@ public class TicTacToe {
    * @return (1 : победил игрок), (-1: победил AI), (0: игра продолжается)
    */
   private static int nextTurn() {
-    int[] playerTurn = playerTurn();
-    int[] turnPlace = playerTurn;
+    int[] lastPlayerTurnPlace = playerTurn();
+    int[] turnPlace = lastPlayerTurnPlace;
     int checkWinnersResult = checkWinners(turnPlace[0], turnPlace[1]);
     if (checkWinnersResult == 0) {
-      turnPlace = aiTurn(playerTurn);
+      turnPlace = aiTurn(lastPlayerTurnPlace);
       printGameField();
       return checkWinners(turnPlace[0], turnPlace[1]);
     } else {
