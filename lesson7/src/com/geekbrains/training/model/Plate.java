@@ -17,9 +17,6 @@ public class Plate {
 
   public void decreaseFood(int amount) {
     food -= amount;
-  }
-
-  public void info() {
-    System.out.println("Food: " + food);
+    System.out.println(food);
   }
 }

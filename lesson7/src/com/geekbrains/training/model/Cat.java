@@ -17,9 +17,6 @@ public class Cat {
     if (plate.isPlateValid(amountFood)) {
       plate.decreaseFood(amountFood);
       isHungry = false;
-      System.out.println(name + " is happy and ready to run.");
-    } else {
-      System.out.println(name + " is disappointed. The plate needs to be filled.");
     }
   }
 
