@@ -7,10 +7,12 @@ public class Plate {
     this.food = food;
   }
 
+  @SuppressWarnings("unused")
   public int getFood() {
     return food;
   }
 
+  @SuppressWarnings("unused")
   public void setFood(int food) {
     this.food = food;
   }
