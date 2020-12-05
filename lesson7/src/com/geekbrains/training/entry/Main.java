@@ -7,7 +7,7 @@ public class Main {
   public static void main(String[] args) {
     Cat cat = new Cat("Murzik");
     Plate plate = new Plate(100);
-    cat.eat(plate);
+    cat.eat(plate, 10);
     plate.info();
   }
 

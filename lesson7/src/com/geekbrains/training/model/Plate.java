@@ -11,11 +11,11 @@ public class Plate {
     return food;
   }
 
+  public boolean isPlateValid(int amountFood) {
+    return !(amountFood < 0 || food - amountFood < 0);
+  }
+
   public void decreaseFood(int amount) {
-    if (amount < 0 || food - amount < 0) {
-      System.out.println("Place is empty or cannot be used");
-      return;
-    }
     food -= amount;
   }
 
