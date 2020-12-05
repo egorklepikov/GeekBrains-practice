@@ -11,6 +11,10 @@ public class Plate {
     return food;
   }
 
+  public void setFood(int food) {
+    this.food = food;
+  }
+
   public boolean isPlateValid(int amountFood) {
     return !(amountFood < 0 || food - amountFood < 0);
   }
