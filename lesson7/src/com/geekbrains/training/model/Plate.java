@@ -12,7 +12,8 @@ public class Plate {
   }
 
   public void decreaseFood(int amount) {
-    if (amount < 0) {
+    if (amount < 0 || food - amount < 0) {
+      System.out.println("Place is empty or cannot be used");
       return;
     }
     food -= amount;
