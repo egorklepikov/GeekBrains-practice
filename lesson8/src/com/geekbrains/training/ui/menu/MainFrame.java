@@ -25,7 +25,10 @@ public class MainFrame extends JFrame {
 
     JButton startGameButton = new JButton();
     startGameButton.setText("Start game");
-    startGameButton.addActionListener(e -> settingsDialog.showDialog());
+    startGameButton.addActionListener(e -> {
+      startGameButton.setVisible(false);
+      settingsDialog.showDialog();
+    });
 
     add(gamePanel, BorderLayout.CENTER);
     add(startGameButton, BorderLayout.SOUTH);
