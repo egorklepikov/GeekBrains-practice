@@ -7,9 +7,8 @@ import javax.swing.*;
 import java.awt.*;
 
 public class SettingsDialog extends JDialog {
-  private JTextField gameFieldSizeField;
-  private JTextField requiredElementsField;
-  private JButton startGameButton;
+  private final JTextField gameFieldSizeField;
+  private final JTextField requiredElementsField;
 
   public SettingsDialog(GamePanel gamePanel) {
     setModal(true);
@@ -20,7 +19,7 @@ public class SettingsDialog extends JDialog {
 
     gameFieldSizeField = new JTextField(10);
     requiredElementsField = new JTextField(10);
-    startGameButton = new JButton("Start game");
+    JButton startGameButton = new JButton("Start game");
     startGameButton.addActionListener(e -> {
       gamePanel.startGame(Integer.parseInt(gameFieldSizeField.getText()), Integer.parseInt(requiredElementsField.getText()));
       setVisible(false);
