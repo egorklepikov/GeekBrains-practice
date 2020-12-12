@@ -9,7 +9,6 @@ public class Zero extends GameElement {
     super(cellCoordinateX, cellCoordinateY);
     try {
       image = ImageIO.read(new File("lesson8\\assets\\zero.png"));
-      //C:\Users\egork\IdeaProjects\GeekBrains - practice\lesson8\assets
     } catch (IOException e) {
       e.printStackTrace();
     }
