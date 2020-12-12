@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class GamePanel extends JPanel implements MouseInputListener {
   private boolean isGameStarted;
-  private final ArrayList<GameElement> gameElements;
+  private ArrayList<GameElement> gameElements;
   private CellConverter cellConverter;
   private GameLogic gameLogic;
 
@@ -24,6 +24,7 @@ public class GamePanel extends JPanel implements MouseInputListener {
 
   public void startGame(int fieldSize, int requiredNumber) {
     isGameStarted = true;
+    gameElements = new ArrayList<>();
     GameUtils.getInstance().setFieldSize(fieldSize);
     GameUtils.getInstance().setGameFieldWidth(getWidth());
     GameUtils.getInstance().setGameFieldHeight(getHeight());
@@ -118,10 +119,10 @@ public class GamePanel extends JPanel implements MouseInputListener {
   public void mouseClicked(MouseEvent e) {
     if (playerTurn(e)) {
       ResultDialog resultDialog = new ResultDialog();
-      resultDialog.showDialog(true);
+      resultDialog.showDialog(true, this);
     } else if (aiTurn()) {
       ResultDialog resultDialog = new ResultDialog();
-      resultDialog.showDialog(false);
+      resultDialog.showDialog(false, this);
     } else {
       System.out.println("continue");
     }
