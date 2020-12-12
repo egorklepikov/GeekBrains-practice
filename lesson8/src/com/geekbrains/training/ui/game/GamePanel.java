@@ -10,14 +10,14 @@ import java.util.ArrayList;
 
 public class GamePanel extends JPanel implements MouseInputListener {
   private boolean isGameStarted;
-  private final ArrayList<Cross> crosses;
+  private final ArrayList<GameElement> gameElements;
   private CellConverter cellConverter;
   private GameLogic gameLogic;
 
   public GamePanel() {
     setBackground(new Color(224, 224, 224));
     addMouseListener(this);
-    crosses = new ArrayList<>();
+    gameElements = new ArrayList<>();
     isGameStarted = false;
   }
 
@@ -43,17 +43,17 @@ public class GamePanel extends JPanel implements MouseInputListener {
       graphics2D.setColor(Color.white);
       drawRows(graphics2D);
       drawColumns(graphics2D);
-      drawCrosses(g);
+      drawGameElements(g);
     }
   }
 
-  private void drawCrosses(Graphics graphics) {
-    for (Cross cross : crosses) {
-      if (cross != null) {
+  private void drawGameElements(Graphics graphics) {
+    for (GameElement gameElement : gameElements) {
+      if (gameElement != null) {
         graphics.drawImage(
-          cross.getImage(),
-          cross.getX(),
-          cross.getY(),
+          gameElement.getImage(),
+          gameElement.getX(),
+          gameElement.getY(),
           GameUtils.getInstance().getCellWidth(),
           GameUtils.getInstance().getCellHeight(),
           null
@@ -128,7 +128,9 @@ public class GamePanel extends JPanel implements MouseInputListener {
   }
 
   private boolean aiTurn() {
-    return false;
+    int[] cell = gameLogic.nextAiTurn();
+    addNewZero(cell[1], cell[0]);
+    return gameLogic.checkWinners(cell[1], cell[0]) == -1;
   }
 
   private boolean playerTurn(MouseEvent e) {
@@ -169,7 +171,11 @@ public class GamePanel extends JPanel implements MouseInputListener {
 
   private int[] addNewCross(int x, int y) {
     int[] cellCoordinates = cellConverter.convert(x, y);
-    crosses.add(new Cross(cellCoordinates[0], cellCoordinates[1]));
+    gameElements.add(new Cross(cellCoordinates[0], cellCoordinates[1]));
     return cellCoordinates;
+  }
+
+  private void addNewZero(int x, int y) {
+    gameElements.add(new Zero(x, y));
   }
 }
