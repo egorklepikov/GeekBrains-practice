@@ -21,14 +21,13 @@ public class GamePanel extends JPanel implements MouseInputListener {
     isGameStarted = false;
   }
 
-  public void startGame(int xSize, int ySize) {
+  public void startGame(int fieldSize, int requiredNumber) {
     isGameStarted = true;
-    GameUtils.getInstance().setFieldSizeX(xSize);
-    GameUtils.getInstance().setFieldSizeY(ySize);
+    GameUtils.getInstance().setFieldSize(fieldSize);
     GameUtils.getInstance().setGameFieldWidth(getWidth());
     GameUtils.getInstance().setGameFieldHeight(getHeight());
     gameLogic = new GameLogic();
-    gameLogic.initGameField(xSize);
+    gameLogic.initGameField(fieldSize, requiredNumber);
     cellConverter = new CellConverter();
     revalidate();
     repaint();
@@ -65,11 +64,11 @@ public class GamePanel extends JPanel implements MouseInputListener {
   private void drawColumns(Graphics2D graphics2D) {
     Rectangle panelBounds = this.getBounds();
     int[] previousCoordinates = new int[4];
-    for (int xSizeIndex = 0; xSizeIndex < GameUtils.getInstance().getFieldSizeY() - 1; xSizeIndex++) {
+    for (int xSizeIndex = 0; xSizeIndex < GameUtils.getInstance().getFieldSize() - 1; xSizeIndex++) {
       if (xSizeIndex == 0) {
-        previousCoordinates = drawColumn(GameUtils.getInstance().getFieldSizeY(), graphics2D, panelBounds);
+        previousCoordinates = drawColumn(GameUtils.getInstance().getFieldSize(), graphics2D, panelBounds);
       } else {
-        previousCoordinates = drawColumn(GameUtils.getInstance().getFieldSizeY(), graphics2D, panelBounds, previousCoordinates);
+        previousCoordinates = drawColumn(GameUtils.getInstance().getFieldSize(), graphics2D, panelBounds, previousCoordinates);
       }
     }
   }
@@ -91,11 +90,11 @@ public class GamePanel extends JPanel implements MouseInputListener {
   private void drawRows(Graphics2D graphics2D) {
     Rectangle panelBounds = this.getBounds();
     int[] previousCoordinates = new int[4];
-    for (int xSizeIndex = 0; xSizeIndex < GameUtils.getInstance().getFieldSizeX() - 1; xSizeIndex++) {
+    for (int xSizeIndex = 0; xSizeIndex < GameUtils.getInstance().getFieldSize() - 1; xSizeIndex++) {
       if (xSizeIndex == 0) {
-        previousCoordinates = drawRow(GameUtils.getInstance().getFieldSizeX(), graphics2D, panelBounds);
+        previousCoordinates = drawRow(GameUtils.getInstance().getFieldSize(), graphics2D, panelBounds);
       } else {
-        previousCoordinates = drawRow(GameUtils.getInstance().getFieldSizeX(), graphics2D, panelBounds, previousCoordinates);
+        previousCoordinates = drawRow(GameUtils.getInstance().getFieldSize(), graphics2D, panelBounds, previousCoordinates);
       }
     }
   }

@@ -7,54 +7,44 @@ import javax.swing.*;
 import java.awt.*;
 
 public class SettingsDialog extends JDialog {
-  private final JButton startGame;
-  private final JSlider gameFieldX;
-  private final JSlider getGameFieldY;
-  private final JLabel selectGameFieldXLabel;
-  private final JLabel selectGameFieldYLabel;
+  private JTextField gameFieldSizeField;
+  private JTextField requiredElementsField;
+  private JButton startGameButton;
 
   public SettingsDialog(GamePanel gamePanel) {
     setModal(true);
     setSize(Constants.SCREEN_WIDTH / 2, Constants.SCREEN_HEIGHT / 2);
     centerDialog();
     setTitle("Select settings");
+    setLayout(new GridBagLayout());
 
-    selectGameFieldXLabel = new JLabel("Enter X value:");
-    selectGameFieldYLabel = new JLabel("Enter Y value:");
-
-    gameFieldX = new JSlider();
-    gameFieldX.setMinimum(3);
-    gameFieldX.setMaximum(9);
-    gameFieldX.setMajorTickSpacing(1);
-    gameFieldX.setMinorTickSpacing(1);
-    gameFieldX.setPaintTicks(true);
-    gameFieldX.setPaintLabels(true);
-
-    getGameFieldY = new JSlider();
-    getGameFieldY.setMinimum(3);
-    getGameFieldY.setMaximum(9);
-    getGameFieldY.setMajorTickSpacing(1);
-    getGameFieldY.setMinorTickSpacing(1);
-    getGameFieldY.setPaintTicks(true);
-    getGameFieldY.setPaintLabels(true);
-
-    JPanel slidersPanel = new JPanel();
-    slidersPanel.setLayout(new GridLayout(4, 2));
-    slidersPanel.add(selectGameFieldXLabel);
-    slidersPanel.add(gameFieldX);
-    slidersPanel.add(selectGameFieldYLabel);
-    slidersPanel.add(getGameFieldY);
-
-    startGame = new JButton();
-    startGame.setText("Continue");
-    startGame.addActionListener(e -> {
-      gamePanel.startGame(gameFieldX.getValue(), getGameFieldY.getValue());
+    gameFieldSizeField = new JTextField(10);
+    requiredElementsField = new JTextField(10);
+    startGameButton = new JButton("Start game");
+    startGameButton.addActionListener(e -> {
+      gamePanel.startGame(Integer.parseInt(gameFieldSizeField.getText()), Integer.parseInt(requiredElementsField.getText()));
       setVisible(false);
     });
 
-    add(startGame, BorderLayout.SOUTH);
-    add(slidersPanel, BorderLayout.CENTER);
-    pack();
+    GridBagConstraints constraints = new GridBagConstraints();
+    constraints.insets = new Insets(5, 5, 5, 5);
+    constraints.gridx = 0;
+    constraints.gridy = 0;
+    add(new JLabel("Input game field size: "), constraints);
+    constraints.gridx = 1;
+    constraints.gridy = 0;
+    add(gameFieldSizeField, constraints);
+    constraints.gridx = 0;
+    constraints.gridy = 1;
+    add(new JLabel("Input game field size: "), constraints);
+    constraints.gridx = 1;
+    constraints.gridy = 1;
+    add(requiredElementsField, constraints);
+    constraints.gridx = 0;
+    constraints.gridy = 2;
+    add(startGameButton, constraints);
+
+    setSize(400, 200);
   }
 
   private void centerDialog() {

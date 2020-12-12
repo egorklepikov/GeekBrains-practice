@@ -22,7 +22,6 @@ public class MainFrame extends JFrame {
     centerFrame();
 
     gamePanel = new GamePanel();
-
     settingsDialog = new SettingsDialog(gamePanel);
 
     JButton startGameButton = new JButton();

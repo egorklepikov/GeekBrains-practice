@@ -2,8 +2,7 @@ package com.geekbrains.training.ui.game;
 
 public class GameUtils {
   private static GameUtils instance;
-  private int fieldSizeX;
-  private int fieldSizeY;
+  private int fieldSize;
   private int gameFieldWidth;
   private int gameFieldHeight;
 
@@ -19,27 +18,19 @@ public class GameUtils {
   }
 
   public int getCellWidth() {
-    return gameFieldWidth / fieldSizeX;
+    return gameFieldWidth / fieldSize;
   }
 
   public int getCellHeight() {
-    return gameFieldHeight / fieldSizeY;
+    return gameFieldHeight / fieldSize;
   }
 
-  public int getFieldSizeX() {
-    return fieldSizeX;
+  public int getFieldSize() {
+    return fieldSize;
   }
 
-  public void setFieldSizeX(int fieldSizeX) {
-    this.fieldSizeX = fieldSizeX;
-  }
-
-  public int getFieldSizeY() {
-    return fieldSizeY;
-  }
-
-  public void setFieldSizeY(int fieldSizeY) {
-    this.fieldSizeY = fieldSizeY;
+  public void setFieldSize(int fieldSize) {
+    this.fieldSize = fieldSize;
   }
 
   public int getGameFieldWidth() {

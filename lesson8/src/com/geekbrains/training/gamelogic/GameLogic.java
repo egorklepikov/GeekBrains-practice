@@ -445,8 +445,9 @@ public class GameLogic {
     return gameField[row][column] == EMPTY;
   }
 
-  public void initGameField(int gameFieldSize) {
-    fieldSize = gameFieldSize;
+  public void initGameField(int gameFieldSize, int requiredNumber) {
+    this.fieldSize = gameFieldSize;
+    this.requiredMatches = requiredNumber;
     gameField = new char[fieldSize][fieldSize];
     for (int rowIndex = 0; rowIndex < fieldSize; rowIndex++) {
       for (int columnIndex = 0; columnIndex < fieldSize; columnIndex++) {
