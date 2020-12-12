@@ -1,6 +1,7 @@
 package com.geekbrains.training.ui.game;
 
 import com.geekbrains.training.gamelogic.GameLogic;
+import com.geekbrains.training.ui.menu.ResultDialog;
 
 import javax.swing.*;
 import javax.swing.event.MouseInputListener;
@@ -116,9 +117,11 @@ public class GamePanel extends JPanel implements MouseInputListener {
   @Override
   public void mouseClicked(MouseEvent e) {
     if (playerTurn(e)) {
-      System.out.println("Player won");
+      ResultDialog resultDialog = new ResultDialog();
+      resultDialog.showDialog(true);
     } else if (aiTurn()) {
-      System.out.println("AI won");
+      ResultDialog resultDialog = new ResultDialog();
+      resultDialog.showDialog(false);
     } else {
       System.out.println("continue");
     }
