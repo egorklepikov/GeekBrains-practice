@@ -1,50 +1,21 @@
 package com.geekbrains.training.gamelogic;
 
 import java.util.Random;
-import java.util.Scanner;
 
 public class GameLogic {
-  private static final Scanner scanner = new Scanner(System.in);
-  private static final Random random = new Random();
+  private final Random random = new Random();
 
-  private static final int GAME_FIELD_SIZE = 9;
-  private static final int REQUIRED_MATCHES = 4;
+  private int fieldSize = 3;
+  private int requiredMatches = 3;
 
-  private static final char CROSS = 'X';
-  private static final char ZERO = 'O';
-  private static final char EMPTY = '.';
+  private final char CROSS = 'X';
+  private final char ZERO = 'O';
+  private final char EMPTY = '.';
 
-  private static char[][] gameField;
+  private char[][] gameField;
 
-  public static void main(String[] args) {
-    startGameProcess();
-  }
-
-  public static void startGameProcess() {
-    initGameField();
-    startGame();
-  }
-
-  private static void startGame() {
-    boolean isGameFinished = false;
-    while (!isGameFinished) {
-      int gameResult = nextTurn();
-      switch (gameResult) {
-        case 1:
-        case -1:
-          printGameResult(gameResult);
-          printGameField();
-          isGameFinished = true;
-          break;
-      }
-    }
-  }
-
-  /**
-   * @return (1 : победил игрок), (-1: победил AI), (0: игра продолжается)
-   */
-  private static int nextTurn() {
-    int[] lastPlayerTurnPlace = playerTurn();
+  public int nextTurn(int x, int y) {
+    int[] lastPlayerTurnPlace = playerTurn(x, y);
     int[] turnPlace = lastPlayerTurnPlace;
     int checkWinnersResult = checkWinners(turnPlace[0], turnPlace[1]);
     if (checkWinnersResult == 0) {
@@ -56,20 +27,12 @@ public class GameLogic {
     }
   }
 
-  private static int[] playerTurn() {
-    int row;
-    int column;
-    do {
-      System.out.print("Enter column number: ");
-      column = scanner.nextInt() - 1;
-      System.out.print("Enter row number: ");
-      row = scanner.nextInt() - 1;
-    } while (!isCellValid(row, column));
-    gameField[row][column] = CROSS;
-    return new int[]{row, column};
+  private int[] playerTurn(int x, int y) {
+    gameField[x][y] = CROSS;
+    return new int[]{x, y};
   }
 
-  private static int[] aiTurn(int[] playerTurn) {
+  private int[] aiTurn(int[] playerTurn) {
     int[] aiTurnPlace;
     int[] whereToDefence = new int[2];
     if (isDefenceRequired(whereToDefence, playerTurn)) {
@@ -80,33 +43,33 @@ public class GameLogic {
     return aiTurnPlace;
   }
 
-  private static int[] attack() {
+  private int[] attack() {
     int row;
     int column;
     do {
-      row = random.nextInt(GAME_FIELD_SIZE);
-      column = random.nextInt(GAME_FIELD_SIZE);
+      row = random.nextInt(fieldSize);
+      column = random.nextInt(fieldSize);
     } while (!isCellValid(row, column));
     gameField[row][column] = ZERO;
     return new int[]{row, column};
   }
 
   @SuppressWarnings("SameParameterValue")
-  private static int[] defence(char element, int[] whereToDefence) {
+  private int[] defence(char element, int[] whereToDefence) {
     gameField[whereToDefence[0]][whereToDefence[1]] = element;
     return whereToDefence;
   }
 
-  private static boolean isDefenceRequired(int[] whereToDefence, int[] playerTurn) {
+  private boolean isDefenceRequired(int[] whereToDefence, int[] playerTurn) {
     boolean isDefenceRequired = false;
-    if (checkElementScore(CROSS, playerTurn[0], playerTurn[1]) >= REQUIRED_MATCHES - 2) {
+    if (checkElementScore(CROSS, playerTurn[0], playerTurn[1]) >= requiredMatches - 2) {
       isDefenceRequired = whereToDefence(whereToDefence, CROSS, playerTurn[0], playerTurn[1]);
     }
     return isDefenceRequired;
   }
 
   @SuppressWarnings("SameParameterValue")
-  private static boolean whereToDefence(int[] whereToDefence, char element, int row, int column) {
+  private boolean whereToDefence(int[] whereToDefence, char element, int row, int column) {
     boolean isPlaceFound = checkRow(whereToDefence, element, row, column);
     if (!isPlaceFound) {
       isPlaceFound = checkColumn(whereToDefence, element, row, column);
@@ -120,10 +83,10 @@ public class GameLogic {
     return isPlaceFound;
   }
 
-  private static boolean checkAdditionalDiagonal(int[] whereToDefence, char element, int row, int column) {
+  private boolean checkAdditionalDiagonal(int[] whereToDefence, char element, int row, int column) {
     int crossesCount;
     crossesCount = countAdditionalDiagonalUp(element, row, column) + countAdditionalDiagonalDown(element, row + 1, column - 1);
-    if (crossesCount >= REQUIRED_MATCHES - 2) {
+    if (crossesCount >= requiredMatches - 2) {
       int[] upBorder = getUpAdditionalDiagonalBorder(row, column);
       int[] downBorder = getDownAdditionalDiagonalBorder(element, row, column);
       if (isCellValid(upBorder[0] - 1, upBorder[1] + 1)) {
@@ -139,10 +102,10 @@ public class GameLogic {
     return false;
   }
 
-  private static boolean checkMainDiagonal(int[] whereToDefence, char element, int row, int column) {
+  private boolean checkMainDiagonal(int[] whereToDefence, char element, int row, int column) {
     int crossesCount;
     crossesCount = countMainDiagonalUp(element, row, column) + countMainDiagonalDown(element, row + 1, column + 1);
-    if (crossesCount >= REQUIRED_MATCHES - 2) {
+    if (crossesCount >= requiredMatches - 2) {
       int[] upBorder = getUpMainDiagonalBorder(row, column);
       int[] downBorder = getDownMainDiagonalBorder(element, row, column);
       if (isCellValid(upBorder[0] - 1, upBorder[1] - 1)) {
@@ -158,10 +121,10 @@ public class GameLogic {
     return false;
   }
 
-  private static boolean checkRow(int[] whereToDefence, char element, int row, int column) {
+  private boolean checkRow(int[] whereToDefence, char element, int row, int column) {
     int crossesCount;
     crossesCount = countRight(element, row, column + 1) + countLeft(element, row, column);
-    if (crossesCount >= REQUIRED_MATCHES - 2) {
+    if (crossesCount >= requiredMatches - 2) {
       int leftBorder = getLeftBorder(element, row, column);
       int rightBorder = getRightBorder(element, row, column);
       if (isCellValid(row, leftBorder + 1)) {
@@ -177,10 +140,10 @@ public class GameLogic {
     return false;
   }
 
-  private static boolean checkColumn(int[] whereToDefence, char element, int row, int column) {
+  private boolean checkColumn(int[] whereToDefence, char element, int row, int column) {
     int crossesCount;
     crossesCount = countUp(element, row, column) + countDown(element, row + 1, column);
-    if (crossesCount >= REQUIRED_MATCHES - 2) {
+    if (crossesCount >= requiredMatches - 2) {
       int upBorder = getUpBorder(element, row, column);
       int downBorder = getDownBorder(row, column);
       if (isCellValid(row, upBorder - 1)) {
@@ -196,7 +159,7 @@ public class GameLogic {
     return false;
   }
 
-  private static int checkWinners(int row, int column) {
+  private int checkWinners(int row, int column) {
     if (checkCrosses(row, column)) {
       return 1;
     } else if (checkZeros(row, column)) {
@@ -206,53 +169,53 @@ public class GameLogic {
     }
   }
 
-  private static boolean checkCrosses(int row, int column) {
+  private boolean checkCrosses(int row, int column) {
     return checkElement(CROSS, row, column);
   }
 
-  private static boolean checkZeros(int row, int column) {
+  private boolean checkZeros(int row, int column) {
     return checkElement(ZERO, row, column);
   }
 
-  private static boolean checkElement(char element, int row, int column) {
+  private boolean checkElement(char element, int row, int column) {
     int crossesCount;
     crossesCount = countRight(element, row, column + 1) + countLeft(element, row, column);
-    if (crossesCount >= REQUIRED_MATCHES) {
+    if (crossesCount >= requiredMatches) {
       return true;
     }
     crossesCount = countUp(element, row, column) + countDown(element, row + 1, column);
-    if (crossesCount >= REQUIRED_MATCHES) {
+    if (crossesCount >= requiredMatches) {
       return true;
     }
     crossesCount = countMainDiagonalUp(element, row, column) + countMainDiagonalDown(element, row + 1, column + 1);
-    if (crossesCount >= REQUIRED_MATCHES) {
+    if (crossesCount >= requiredMatches) {
       return true;
     }
 
     crossesCount = countAdditionalDiagonalUp(element, row, column) + countAdditionalDiagonalDown(element, row + 1, column - 1);
-    return crossesCount >= REQUIRED_MATCHES;
+    return crossesCount >= requiredMatches;
   }
 
   @SuppressWarnings("SameParameterValue")
-  private static int checkElementScore(char element, int row, int column) {
+  private int checkElementScore(char element, int row, int column) {
     int crossesCount;
     crossesCount = countRight(element, row, column + 1) + countLeft(element, row, column);
-    if (crossesCount >= REQUIRED_MATCHES - 2) {
+    if (crossesCount >= requiredMatches - 2) {
       return crossesCount;
     }
     crossesCount = countUp(element, row, column) + countDown(element, row + 1, column);
-    if (crossesCount >= REQUIRED_MATCHES - 2) {
+    if (crossesCount >= requiredMatches - 2) {
       return crossesCount;
     }
     crossesCount = countMainDiagonalUp(element, row, column) + countMainDiagonalDown(element, row + 1, column + 1);
-    if (crossesCount >= REQUIRED_MATCHES - 2) {
+    if (crossesCount >= requiredMatches - 2) {
       return crossesCount;
     }
     crossesCount = countAdditionalDiagonalUp(element, row, column) + countAdditionalDiagonalDown(element, row + 1, column - 1);
     return crossesCount;
   }
 
-  private static int countRight(char element, int row, int column) {
+  private int countRight(char element, int row, int column) {
     int count = 0;
     for (; column < gameField.length; column++) {
       if (element == gameField[row][column]) {
@@ -264,7 +227,7 @@ public class GameLogic {
     return count;
   }
 
-  private static int getRightBorder(char element, int row, int column) {
+  private int getRightBorder(char element, int row, int column) {
     char currentElement = element;
     while (currentElement == CROSS) {
       column++;
@@ -277,7 +240,7 @@ public class GameLogic {
     return column;
   }
 
-  private static int countLeft(char element, int row, int column) {
+  private int countLeft(char element, int row, int column) {
     int count = 0;
     for (; column >= 0; column--) {
       if (element == gameField[row][column]) {
@@ -289,7 +252,7 @@ public class GameLogic {
     return count;
   }
 
-  private static int getLeftBorder(char element, int row, int column) {
+  private int getLeftBorder(char element, int row, int column) {
     char currentElement = element;
     while (currentElement == CROSS) {
       if (column >= 0) {
@@ -302,7 +265,7 @@ public class GameLogic {
     return column;
   }
 
-  private static int countUp(char element, int row, int column) {
+  private int countUp(char element, int row, int column) {
     int count = 0;
     for (; row >= 0; row--) {
       if (element == gameField[row][column]) {
@@ -314,7 +277,7 @@ public class GameLogic {
     return count;
   }
 
-  private static int getUpBorder(char element, int row, int column) {
+  private int getUpBorder(char element, int row, int column) {
     char currentElement = element;
     while (currentElement == CROSS) {
       row--;
@@ -327,7 +290,7 @@ public class GameLogic {
     return row;
   }
 
-  private static int countDown(char element, int row, int column) {
+  private int countDown(char element, int row, int column) {
     int count = 0;
     for (; row < gameField.length; row++) {
       if (element == gameField[row][column]) {
@@ -339,7 +302,7 @@ public class GameLogic {
     return count;
   }
 
-  private static int getDownBorder(int row, int column) {
+  private int getDownBorder(int row, int column) {
     char element;
     do {
       row++;
@@ -352,7 +315,7 @@ public class GameLogic {
     return --row;
   }
 
-  private static int countMainDiagonalDown(char element, int row, int column) {
+  private int countMainDiagonalDown(char element, int row, int column) {
     int count = 0;
     for (; row < gameField.length; row++) {
       for (; column < gameField.length; column++) {
@@ -366,7 +329,7 @@ public class GameLogic {
     return count;
   }
 
-  private static int[] getDownMainDiagonalBorder(char element, int row, int column) {
+  private int[] getDownMainDiagonalBorder(char element, int row, int column) {
     do {
       if (row < gameField.length && column < gameField.length) {
         row++;
@@ -381,7 +344,7 @@ public class GameLogic {
     return new int[]{--row, --column};
   }
 
-  private static int countMainDiagonalUp(char element, int row, int column) {
+  private int countMainDiagonalUp(char element, int row, int column) {
     int count = 0;
     for (; row >= 0; row--) {
       for (; column >= 0; column--) {
@@ -395,7 +358,7 @@ public class GameLogic {
     return count;
   }
 
-  private static int[] getUpMainDiagonalBorder(int row, int column) {
+  private int[] getUpMainDiagonalBorder(int row, int column) {
     char element;
     do {
       row--;
@@ -413,7 +376,7 @@ public class GameLogic {
     return new int[]{++row, ++column};
   }
 
-  private static int countAdditionalDiagonalUp(char element, int row, int column) {
+  private int countAdditionalDiagonalUp(char element, int row, int column) {
     int count = 0;
     for (; row >= 0; row--) {
       for (; column < gameField.length; column++) {
@@ -427,7 +390,7 @@ public class GameLogic {
     return count;
   }
 
-  private static int[] getUpAdditionalDiagonalBorder(int row, int column) {
+  private int[] getUpAdditionalDiagonalBorder(int row, int column) {
     char element;
     do {
       row--;
@@ -445,7 +408,7 @@ public class GameLogic {
     return new int[]{++row, --column};
   }
 
-  private static int[] getDownAdditionalDiagonalBorder(char element, int row, int column) {
+  private int[] getDownAdditionalDiagonalBorder(char element, int row, int column) {
     do {
       if (row < gameField.length && column < gameField.length) {
         row++;
@@ -460,7 +423,7 @@ public class GameLogic {
     return new int[]{--row, ++column};
   }
 
-  private static int countAdditionalDiagonalDown(char element, int row, int column) {
+  private int countAdditionalDiagonalDown(char element, int row, int column) {
     int count = 0;
     if (row >= gameField.length || column >= gameField.length) {
       return 0;
@@ -477,59 +440,52 @@ public class GameLogic {
     return count;
   }
 
-  private static boolean isCellValid(int row, int column) {
-    if (row < 0 || column < 0 || row >= GAME_FIELD_SIZE || column >= GAME_FIELD_SIZE) {
+  private boolean isCellValid(int row, int column) {
+    if (row < 0 || column < 0 || row >= fieldSize || column >= fieldSize) {
       return false;
     }
     return gameField[row][column] == EMPTY;
   }
 
-  private static void initGameField() {
-    gameField = new char[GAME_FIELD_SIZE][GAME_FIELD_SIZE];
-    for (int rowIndex = 0; rowIndex < GAME_FIELD_SIZE; rowIndex++) {
-      for (int columnIndex = 0; columnIndex < GAME_FIELD_SIZE; columnIndex++) {
+  public void initGameField(int gameFieldSize) {
+    fieldSize = gameFieldSize;
+    gameField = new char[fieldSize][fieldSize];
+    for (int rowIndex = 0; rowIndex < fieldSize; rowIndex++) {
+      for (int columnIndex = 0; columnIndex < fieldSize; columnIndex++) {
         gameField[rowIndex][columnIndex] = EMPTY;
       }
     }
   }
 
-  private static void printGameField() {
+  private void printGameField() {
     printBorder();
     printColumnNumbers();
     printGameFieldContent();
     printBorder();
   }
 
-  private static void printGameFieldContent() {
+  private void printGameFieldContent() {
     System.out.println();
-    for (int rowIndex = 0; rowIndex < GAME_FIELD_SIZE; rowIndex++) {
+    for (int rowIndex = 0; rowIndex < fieldSize; rowIndex++) {
       System.out.print(rowIndex + 1 + " ");
-      for (int columnIndex = 0; columnIndex < GAME_FIELD_SIZE; columnIndex++) {
+      for (int columnIndex = 0; columnIndex < fieldSize; columnIndex++) {
         System.out.printf("%c  ", gameField[rowIndex][columnIndex]);
       }
       System.out.println();
     }
   }
 
-  private static void printColumnNumbers() {
+  private void printColumnNumbers() {
     System.out.print("  ");
-    for (int columnIndex = 0; columnIndex < GAME_FIELD_SIZE; columnIndex++) {
+    for (int columnIndex = 0; columnIndex < fieldSize; columnIndex++) {
       System.out.print(columnIndex + 1 + "  ");
     }
   }
 
-  private static void printBorder() {
-    for (int columnIndex = 0; columnIndex < GAME_FIELD_SIZE; columnIndex++) {
+  private void printBorder() {
+    for (int columnIndex = 0; columnIndex < fieldSize; columnIndex++) {
       System.out.print("-- ");
     }
     System.out.println();
-  }
-
-  private static void printGameResult(int gameResult) {
-    if (gameResult == 1) {
-      System.out.println("Congratulations. You did it!");
-    } else if (gameResult == -1) {
-      System.out.println("AI has taken over the world...");
-    }
   }
 }

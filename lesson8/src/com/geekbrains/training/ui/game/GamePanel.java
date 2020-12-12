@@ -1,5 +1,7 @@
 package com.geekbrains.training.ui.game;
 
+import com.geekbrains.training.gamelogic.GameLogic;
+
 import javax.swing.*;
 import javax.swing.event.MouseInputListener;
 import java.awt.*;
@@ -10,6 +12,7 @@ public class GamePanel extends JPanel implements MouseInputListener {
   private boolean isGameStarted;
   private final ArrayList<Cross> crosses;
   private CellConverter cellConverter;
+  private GameLogic gameLogic;
 
   public GamePanel() {
     setBackground(new Color(224, 224, 224));
@@ -24,6 +27,8 @@ public class GamePanel extends JPanel implements MouseInputListener {
     GameUtils.getInstance().setFieldSizeY(ySize);
     GameUtils.getInstance().setGameFieldWidth(getWidth());
     GameUtils.getInstance().setGameFieldHeight(getHeight());
+    gameLogic = new GameLogic();
+    gameLogic.initGameField(xSize);
     cellConverter = new CellConverter();
     revalidate();
     repaint();
@@ -112,6 +117,14 @@ public class GamePanel extends JPanel implements MouseInputListener {
   @Override
   public void mouseClicked(MouseEvent e) {
     int[] cell = addNewCross(e.getX(), e.getY());
+    int turnResult = gameLogic.nextTurn(cell[0], cell[1]);
+    if (turnResult == 1) {
+      System.out.println("test1");
+    } else if (turnResult == -1) {
+      System.out.println("test2");
+    } else {
+      System.out.println("test3");
+    }
     revalidate();
     repaint();
   }
