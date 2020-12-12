@@ -14,16 +14,24 @@ public class GameLogic {
 
   private char[][] gameField;
 
-  public int nextTurn(int x, int y) {
-    int[] lastPlayerTurnPlace = playerTurn(x, y);
-    int[] turnPlace = lastPlayerTurnPlace;
-    int checkWinnersResult = checkWinners(turnPlace[0], turnPlace[1]);
-    if (checkWinnersResult == 0) {
-      turnPlace = aiTurn(lastPlayerTurnPlace);
-      printGameField();
-      return checkWinners(turnPlace[0], turnPlace[1]);
+  private int[] lastPlayerTurnPlace;
+
+  public void nextPlayerTurn(int x, int y) {
+    lastPlayerTurnPlace = playerTurn(x, y);
+    printGameField();
+  }
+
+  public int[] nextAiTurn() {
+    return aiTurn(lastPlayerTurnPlace);
+  }
+
+  public int checkWinners(int row, int column) {
+    if (checkCrosses(row, column)) {
+      return 1;
+    } else if (checkZeros(row, column)) {
+      return -1;
     } else {
-      return checkWinnersResult;
+      return 0;
     }
   }
 
@@ -157,16 +165,6 @@ public class GameLogic {
       }
     }
     return false;
-  }
-
-  private int checkWinners(int row, int column) {
-    if (checkCrosses(row, column)) {
-      return 1;
-    } else if (checkZeros(row, column)) {
-      return -1;
-    } else {
-      return 0;
-    }
   }
 
   private boolean checkCrosses(int row, int column) {

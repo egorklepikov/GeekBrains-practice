@@ -116,17 +116,25 @@ public class GamePanel extends JPanel implements MouseInputListener {
 
   @Override
   public void mouseClicked(MouseEvent e) {
-    int[] cell = addNewCross(e.getX(), e.getY());
-    int turnResult = gameLogic.nextTurn(cell[0], cell[1]);
-    if (turnResult == 1) {
-      System.out.println("test1");
-    } else if (turnResult == -1) {
-      System.out.println("test2");
+    if (playerTurn(e)) {
+      System.out.println("Player won");
+    } else if (aiTurn()) {
+      System.out.println("AI won");
     } else {
-      System.out.println("test3");
+      System.out.println("continue");
     }
     revalidate();
     repaint();
+  }
+
+  private boolean aiTurn() {
+    return false;
+  }
+
+  private boolean playerTurn(MouseEvent e) {
+    int[] cell = addNewCross(e.getX(), e.getY());
+    gameLogic.nextPlayerTurn(cell[1], cell[0]);
+    return gameLogic.checkWinners(cell[1], cell[0]) == 1;
   }
 
   @Override
