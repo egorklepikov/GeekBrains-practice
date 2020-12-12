@@ -3,7 +3,7 @@ package com.geekbrains.training.gamelogic;
 import java.util.Random;
 import java.util.Scanner;
 
-public class TicTacToe {
+public class GameLogic {
   private static final Scanner scanner = new Scanner(System.in);
   private static final Random random = new Random();
 
