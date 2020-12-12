@@ -33,16 +33,8 @@ public class GameUtils {
     this.fieldSize = fieldSize;
   }
 
-  public int getGameFieldWidth() {
-    return gameFieldWidth;
-  }
-
   public void setGameFieldWidth(int gameFieldWidth) {
     this.gameFieldWidth = gameFieldWidth;
-  }
-
-  public int getGameFieldHeight() {
-    return gameFieldHeight;
   }
 
   public void setGameFieldHeight(int gameFieldHeight) {

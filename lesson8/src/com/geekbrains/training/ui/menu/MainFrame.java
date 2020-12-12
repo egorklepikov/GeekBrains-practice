@@ -8,7 +8,6 @@ import java.awt.*;
 
 public class MainFrame extends JFrame {
   private final SettingsDialog settingsDialog;
-  private final GamePanel gamePanel;
 
   public static void main(String[] args) {
     new MainFrame();
@@ -21,14 +20,12 @@ public class MainFrame extends JFrame {
     setResizable(false);
     centerFrame();
 
-    gamePanel = new GamePanel();
+    GamePanel gamePanel = new GamePanel();
     settingsDialog = new SettingsDialog(gamePanel);
 
     JButton startGameButton = new JButton();
     startGameButton.setText("Start game");
-    startGameButton.addActionListener(e -> {
-      settingsDialog.showDialog();
-    });
+    startGameButton.addActionListener(e -> settingsDialog.showDialog());
 
     add(gamePanel, BorderLayout.CENTER);
     add(startGameButton, BorderLayout.SOUTH);
