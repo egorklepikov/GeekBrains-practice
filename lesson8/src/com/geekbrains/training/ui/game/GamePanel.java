@@ -18,7 +18,6 @@ public class GamePanel extends JPanel implements MouseInputListener {
   public GamePanel() {
     setBackground(new Color(224, 224, 224));
     addMouseListener(this);
-    gameElements = new ArrayList<>();
     isGameStarted = false;
   }
 
