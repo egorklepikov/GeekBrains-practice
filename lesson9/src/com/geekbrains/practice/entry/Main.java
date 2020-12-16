@@ -25,7 +25,9 @@ public class Main {
   private static void startChallenge(ICreature[] creatures, IBarrier[] barriers) {
     for (ICreature creature : creatures) {
       for (IBarrier barrier : barriers) {
-        barrier.performAction(creature);
+        if (!barrier.performAction(creature)) {
+          break;
+        }
       }
     }
   }
