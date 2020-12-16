@@ -1,13 +1,32 @@
 package com.geekbrains.practice.creatures;
 
 public class Cat implements ICreature {
+  private int catPowerRun;
+  private int catPowerJump;
+
   @Override
-  public void run() {
-    System.out.println(Cat.class.getCanonicalName() + " is running...");
+  public boolean run(int barrierLength) {
+    return catPowerRun >= barrierLength;
   }
 
   @Override
-  public void jump() {
-    System.out.println(Cat.class.getCanonicalName() + " is jumping...");
+  public boolean jump(int barrierHeight) {
+    return catPowerJump >= barrierHeight;
+  }
+
+  public int getCatPowerRun() {
+    return catPowerRun;
+  }
+
+  public void setCatPowerRun(int catPower) {
+    this.catPowerRun = catPower;
+  }
+
+  public int getCatPowerJump() {
+    return catPowerJump;
+  }
+
+  public void setCatPowerJump(int catPowerJump) {
+    this.catPowerJump = catPowerJump;
   }
 }
