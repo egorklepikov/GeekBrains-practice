@@ -1,4 +1,4 @@
-package com.geekbrains.practice.logic;
+package com.geekbrains.practice.creatures;
 
 public class Robot implements ICreature {
   @Override
