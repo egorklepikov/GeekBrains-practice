@@ -5,6 +5,10 @@ import com.geekbrains.practice.creatures.ICreature;
 public class RunningTrack implements IBarrier {
   private int runningTrackLength;
 
+  public RunningTrack(int runningTrackLength) {
+    this.runningTrackLength = runningTrackLength;
+  }
+
   @Override
   public boolean performAction(ICreature creature) {
     return creature.run(runningTrackLength);

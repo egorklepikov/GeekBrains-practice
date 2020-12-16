@@ -4,6 +4,11 @@ public class Robot implements ICreature {
   private int robotPowerRun;
   private int robotPowerJump;
 
+  public Robot(int robotPowerRun, int robotPowerJump) {
+    this.robotPowerRun = robotPowerRun;
+    this.robotPowerJump = robotPowerJump;
+  }
+
   @Override
   public boolean run(int barrierLength) {
     return robotPowerRun >= barrierLength;

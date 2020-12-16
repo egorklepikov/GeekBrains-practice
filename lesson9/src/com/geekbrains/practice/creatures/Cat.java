@@ -4,6 +4,11 @@ public class Cat implements ICreature {
   private int catPowerRun;
   private int catPowerJump;
 
+  public Cat(int catPowerRun, int catPowerJump) {
+    this.catPowerRun = catPowerRun;
+    this.catPowerJump = catPowerJump;
+  }
+
   @Override
   public boolean run(int barrierLength) {
     return catPowerRun >= barrierLength;

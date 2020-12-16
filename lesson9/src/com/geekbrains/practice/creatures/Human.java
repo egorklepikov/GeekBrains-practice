@@ -4,6 +4,11 @@ public class Human implements ICreature {
   private int humanPowerRun;
   private int humanPowerJump;
 
+  public Human(int humanPowerRun, int humanPowerJump) {
+    this.humanPowerRun = humanPowerRun;
+    this.humanPowerJump = humanPowerJump;
+  }
+
   @Override
   public boolean run(int barrierLength) {
     return humanPowerRun >= barrierLength;

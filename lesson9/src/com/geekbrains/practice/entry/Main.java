@@ -11,13 +11,13 @@ import com.geekbrains.practice.elements.Wall;
 public class Main {
   public static void main(String[] args) {
     ICreature[] creatures = {
-      new Cat(),
-      new Human(),
-      new Robot()
+      new Cat(100, 200),
+      new Human(300, 500),
+      new Robot(1000, 1000)
     };
     IBarrier[] barriers = {
-      new Wall(),
-      new RunningTrack()
+      new Wall(100),
+      new RunningTrack(500)
     };
     startChallenge(creatures, barriers);
   }
