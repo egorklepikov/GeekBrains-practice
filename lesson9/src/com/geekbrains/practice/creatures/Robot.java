@@ -11,12 +11,24 @@ public class Robot implements ICreature {
 
   @Override
   public boolean run(int barrierLength) {
-    return robotPowerRun >= barrierLength;
+    boolean isRun = robotPowerRun >= barrierLength;
+    if (isRun) {
+      System.out.println(Robot.class.getCanonicalName() + " ran successfully...");
+    } else {
+      System.out.println(Robot.class.getCanonicalName() + " cannot run anymore...");
+    }
+    return isRun;
   }
 
   @Override
   public boolean jump(int barrierHeight) {
-    return robotPowerJump >= barrierHeight;
+    boolean isJump = robotPowerJump >= barrierHeight;
+    if (isJump) {
+      System.out.println(Robot.class.getCanonicalName() + " jumped successfully...");
+    } else {
+      System.out.println(Robot.class.getCanonicalName() + " cannot jump anymore...");
+    }
+    return isJump;
   }
 
   public int getRobotPowerRun() {

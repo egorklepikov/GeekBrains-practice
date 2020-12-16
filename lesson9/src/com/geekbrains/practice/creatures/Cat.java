@@ -11,12 +11,24 @@ public class Cat implements ICreature {
 
   @Override
   public boolean run(int barrierLength) {
-    return catPowerRun >= barrierLength;
+    boolean isRun = catPowerRun >= barrierLength;
+    if (isRun) {
+      System.out.println(Cat.class.getCanonicalName() + " ran successfully...");
+    } else {
+      System.out.println(Cat.class.getCanonicalName() + " cannot run anymore...");
+    }
+    return isRun;
   }
 
   @Override
   public boolean jump(int barrierHeight) {
-    return catPowerJump >= barrierHeight;
+    boolean isJump = catPowerJump >= barrierHeight;
+    if (isJump) {
+      System.out.println(Cat.class.getCanonicalName() + " jumped successfully...");
+    } else {
+      System.out.println(Cat.class.getCanonicalName() + " cannot jump anymore...");
+    }
+    return isJump;
   }
 
   public int getCatPowerRun() {

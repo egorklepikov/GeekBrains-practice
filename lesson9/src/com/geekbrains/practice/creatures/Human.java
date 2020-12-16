@@ -11,12 +11,24 @@ public class Human implements ICreature {
 
   @Override
   public boolean run(int barrierLength) {
-    return humanPowerRun >= barrierLength;
+    boolean isRun = humanPowerRun >= barrierLength;
+    if (isRun) {
+      System.out.println(Human.class.getCanonicalName() + " ran successfully...");
+    } else {
+      System.out.println(Human.class.getCanonicalName() + " cannot run anymore...");
+    }
+    return isRun;
   }
 
   @Override
   public boolean jump(int barrierHeight) {
-    return humanPowerJump >= barrierHeight;
+    boolean isJump = humanPowerJump >= barrierHeight;
+    if (isJump) {
+      System.out.println(Human.class.getCanonicalName() + " jumped successfully...");
+    } else {
+      System.out.println(Human.class.getCanonicalName() + " cannot jump anymore...");
+    }
+    return isJump;
   }
 
   public int getHumanPowerRun() {
