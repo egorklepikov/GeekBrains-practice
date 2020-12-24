@@ -8,6 +8,17 @@ public class Main {
     Set<String> uniqueWords = findUniqueWords(words);
     Map<String, Integer> wordsOccurrences = findOccurrences(words);
     printResult(words, uniqueWords, wordsOccurrences);
+
+    PhoneHandbook phoneHandbook = new PhoneHandbook();
+    phoneHandbook.add("Klepikov", "12345678");
+    phoneHandbook.add("Gavrilov", "12345678");
+    phoneHandbook.add("Klepikov", "87654321");
+    phoneHandbook.add("Grigoriev", "12345678");
+    phoneHandbook.add("Grigoriev", "12312");
+    phoneHandbook.add("Grigoriev", "1576");
+    System.out.println(phoneHandbook.get("Klepikov"));
+    System.out.println(phoneHandbook.get("Grigoriev"));
+    System.out.println(phoneHandbook.get("Gavrilov"));
   }
 
   private static Map<String, Integer> findOccurrences(List<String> words) {
