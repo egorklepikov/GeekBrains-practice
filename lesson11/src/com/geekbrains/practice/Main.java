@@ -7,7 +7,9 @@ public class Main {
     List<String> words = fillArrayList();
     Set<String> uniqueWords = findUniqueWords(words);
     Map<String, Integer> wordsOccurrences = findOccurrences(words);
-    printResult(words, uniqueWords, wordsOccurrences);
+    System.out.println(words);
+    System.out.println(uniqueWords);
+    System.out.println(wordsOccurrences);
 
     PhoneHandbook phoneHandbook = new PhoneHandbook();
     phoneHandbook.add("Klepikov", "12345678");
@@ -46,11 +48,5 @@ public class Main {
       words.add(word);
     }
     return words;
-  }
-
-  private static void printResult(List<String> words, Set<String> uniqueWords, Map<String, Integer> wordsInformation) {
-    System.out.println(words);
-    System.out.println(uniqueWords);
-    System.out.println(wordsInformation);
   }
 }
