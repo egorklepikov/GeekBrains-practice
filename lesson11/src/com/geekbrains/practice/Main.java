@@ -39,13 +39,12 @@ public class Main {
     List<String> words = new ArrayList<>();
     int wordsNumber = 20;
     for (int i = 0; i < wordsNumber; i++) {
-      String word;
+      StringBuilder word = new StringBuilder();
+      word.append("word");
       if (i % 2 == 0) {
-        word = "word" + i;
-      } else {
-        word = "word";
+        word.append(i);
       }
-      words.add(word);
+      words.add(word.toString());
     }
     return words;
   }
