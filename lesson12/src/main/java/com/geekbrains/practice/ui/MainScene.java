@@ -10,6 +10,8 @@ public class MainScene extends Application {
   @Override
   public void start(Stage primaryStage) throws Exception {
     Parent root = FXMLLoader.load(getClass().getResource("main_scene.fxml"));
+    primaryStage.setTitle("Chat");
+    primaryStage.setResizable(false);
     primaryStage.setScene(new Scene(root));
     primaryStage.show();
   }

@@ -1,10 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.geekbrains.practice.ui.MainScene"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane stylesheets="main_scene.css" fx:id="mainScene" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.geekbrains.practice.ui.ChatController">
+   <children>
+    <AnchorPane fx:id="leftAnchorPane" minHeight="300.0" minWidth="300.0" prefHeight="768.0" prefWidth="300.0">
+         <children>
+            <VBox prefHeight="768.0" prefWidth="303.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0" />
+         </children>
+      </AnchorPane>
+    <AnchorPane fx:id="rightAnchorPane" layoutX="310.0" layoutY="14.0" minHeight="500.0" minWidth="700.0" prefHeight="768.0" prefWidth="713.0">
+         <children>
+            <GridPane fx:id="rightGridPane" prefHeight="768.0" prefWidth="713.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="713.0" minWidth="10.0" prefWidth="611.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="757.0" minHeight="10.0" prefHeight="722.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="379.0" minHeight="10.0" prefHeight="46.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <TextArea fx:id="messagesPanel" editable="false" focusTraversable="false" prefHeight="722.0" prefWidth="664.0" GridPane.hgrow="NEVER" GridPane.vgrow="NEVER" />
+                  <GridPane fx:id="sendMessageGrid" GridPane.rowIndex="1">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="638.0" minWidth="10.0" prefWidth="631.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="351.0" minWidth="10.0" prefWidth="82.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Button fx:id="sendMessageButton" mnemonicParsing="false" onAction="#sendMessageWithButton" prefHeight="49.0" prefWidth="82.0" text="Button" GridPane.columnIndex="1" />
+                        <TextField fx:id="inputMessage" onKeyPressed="#sendMessageWithField" prefHeight="47.0" prefWidth="631.0" />
+                     </children>
+                  </GridPane>
+               </children>
+            </GridPane>
+         </children>
+      </AnchorPane>
+   </children>
 </AnchorPane>
