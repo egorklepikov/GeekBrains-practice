@@ -76,6 +76,7 @@
             </GridPane>
         </GridPane>
     </AnchorPane>
+    <!--suppress JavaFxUnresolvedFxIdReference -->
     <AnchorPane fx:id="topPane" prefHeight="200.0" prefWidth="200.0">
         <ImageView fx:id="closeButton" fitHeight="15.0" fitWidth="15.0" layoutX="1004.0" layoutY="7.0"
                    onMouseClicked="#onMouseClickedExit" onMouseEntered="#onMouseEnteredExit"
