@@ -1,0 +1,27 @@
+.root {
+    -fx-background-color: #3c3f41;
+    -fx-border-color: #4d5153;
+    -fx-font-size: 13px;
+    -fx-border-width: 2px;
+}
+
+.text-area {
+    -fx-control-inner-background: #2b2b2c;
+    -fx-font-family: Consolas;
+    -fx-text-box-border: #3c3f41;
+    -fx-focus-color: #3c3f41;
+}
+
+.text-area:focused {
+    -fx-faint-focus-color: transparent;
+    -fx-focus-color: rgba(234, 234, 234, 0.2);
+}
+
+.text-field {
+    -fx-font-family: Consolas;
+}
+
+.text-field:focused {
+    -fx-faint-focus-color: transparent;
+    -fx-focus-color: rgba(234, 234, 234, 0.2);
+}

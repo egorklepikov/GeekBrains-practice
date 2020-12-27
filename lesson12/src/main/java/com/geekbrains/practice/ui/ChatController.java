@@ -2,55 +2,57 @@ package com.geekbrains.practice.ui;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
+import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ChatController implements Initializable {
   @FXML
-  private GridPane sendMessageGrid;
+  private ImageView sendButton;
   @FXML
-  private TextField inputMessageButton;
+  private TextArea messagesArea;
   @FXML
-  private AnchorPane mainScene;
-  @FXML
-  private AnchorPane leftAnchorPane;
-  @FXML
-  private AnchorPane rightAnchorPane;
-  @FXML
-  private GridPane rightGridPane;
-  @FXML
-  private TextArea messagesPanel;
-  @FXML
-  private Button sendMessageButton;
-  @FXML
-  private TextField inputMessage;
+  private TextField inputMessageField;
 
   @FXML
   public void sendMessageWithField(KeyEvent keyEvent) {
     if (keyEvent.getCode() == KeyCode.ENTER) {
-      messagesPanel.appendText(inputMessage.getText());
-      inputMessage.clear();
-      inputMessage.requestFocus();
+      messagesArea.appendText(inputMessageField.getText() + "\n");
+      inputMessageField.clear();
+      inputMessageField.requestFocus();
     }
   }
 
   @FXML
-  public void sendMessageWithButton() {
-    messagesPanel.appendText(inputMessage.getText());
-    inputMessage.clear();
-    inputMessage.requestFocus();
-  }
-
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    inputMessageField.requestFocus();
+    sendButton.setImage(new Image("/assets/send_message.jpg"));
+  }
 
+  @FXML
+  public void enterMouseListener(MouseEvent mouseEvent) {
+    sendButton.setScaleX(1.1);
+    sendButton.setScaleY(1.1);
+  }
+
+  @FXML
+  public void exitMouseListener(MouseEvent mouseEvent) {
+    sendButton.setScaleX(1.0);
+    sendButton.setScaleY(1.0);
+  }
+
+  @FXML
+  public void clickedMouseListener(MouseEvent mouseEvent) {
+    messagesArea.appendText(inputMessageField.getText() + "\n");
+    inputMessageField.clear();
+    inputMessageField.requestFocus();
   }
 }
