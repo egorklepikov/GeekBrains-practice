@@ -12,7 +12,6 @@ public class MainScene extends Application {
   public void start(Stage primaryStage) throws Exception {
     Parent root = FXMLLoader.load(getClass().getResource("main_scene.fxml"));
     primaryStage.initStyle(StageStyle.UNDECORATED);
-    primaryStage.setTitle("Chat");
     primaryStage.setResizable(false);
     primaryStage.setScene(new Scene(root));
     primaryStage.show();
