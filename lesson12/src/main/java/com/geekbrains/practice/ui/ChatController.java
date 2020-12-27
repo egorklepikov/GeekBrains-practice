@@ -8,8 +8,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -23,8 +21,6 @@ public class ChatController implements Initializable {
   private TextArea messagesArea;
   @FXML
   private TextField inputMessageField;
-
-  private Stage stage;
 
   @FXML
   @Override
@@ -47,35 +43,35 @@ public class ChatController implements Initializable {
   }
 
   @FXML
-  public void enterMouseListener(MouseEvent mouseEvent) {
+  public void enterMouseListener() {
     sendButton.setScaleX(1.1);
     sendButton.setScaleY(1.1);
   }
 
   @FXML
-  public void exitMouseListener(MouseEvent mouseEvent) {
+  public void exitMouseListener() {
     sendButton.setScaleX(1.0);
     sendButton.setScaleY(1.0);
   }
 
   @FXML
-  public void clickedMouseListener(MouseEvent mouseEvent) {
+  public void clickedMouseListener() {
     messagesArea.appendText(inputMessageField.getText() + "\n");
     inputMessageField.clear();
     inputMessageField.requestFocus();
   }
 
-  public void onMouseEnteredExit(MouseEvent mouseEvent) {
+  public void onMouseEnteredExit() {
     closeButton.setScaleX(1.1);
     closeButton.setScaleY(1.1);
   }
 
-  public void onMouseExitedExit(MouseEvent mouseEvent) {
+  public void onMouseExitedExit() {
     closeButton.setScaleX(1.0);
     closeButton.setScaleY(1.0);
   }
 
-  public void onMouseClickedExit(MouseEvent mouseEvent) {
+  public void onMouseClickedExit() {
     System.exit(0);
   }
 }
