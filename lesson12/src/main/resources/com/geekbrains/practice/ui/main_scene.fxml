@@ -52,7 +52,7 @@
                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                             </padding>
                         </GridPane>
-                        <GridPane hgap="3.0" prefHeight="605.0" prefWidth="770.0" vgap="3.0" GridPane.columnIndex="1">
+                        <GridPane prefHeight="605.0" prefWidth="770.0" GridPane.columnIndex="1">
                             <columnConstraints>
                                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                             </columnConstraints>
@@ -63,22 +63,12 @@
                             <children>
                                 <AnchorPane prefHeight="99.0" prefWidth="770.0" GridPane.rowIndex="1">
                                     <children>
-                                        <TextField fx:id="inputMessageField" layoutY="19.0" onKeyPressed="#sendMessageWithField" prefHeight="45.0" prefWidth="765.0" promptText="Write a message...">
-                                            <padding>
-                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                            </padding>
-                                        </TextField>
-                                        <ImageView fx:id="sendButton" fitHeight="40.0" fitWidth="40.0" layoutX="706.0" layoutY="13.0" onMouseClicked="#clickedMouseListener" onMouseEntered="#enterMouseListener" onMouseExited="#exitMouseListener" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="12.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="12.0" />
+                                        <TextField fx:id="inputMessageField" layoutY="19.0" onKeyPressed="#sendMessageWithField" prefHeight="45.0" prefWidth="765.0" promptText="Write a message..." AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="12.0" />
+                                        <ImageView fx:id="sendButton" fitHeight="40.0" fitWidth="40.0" layoutX="706.0" layoutY="13.0" onMouseClicked="#clickedMouseListener" onMouseEntered="#enterMouseListener" onMouseExited="#exitMouseListener" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="12.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="15.0" />
                                     </children>
-                                    <padding>
-                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                    </padding>
                                 </AnchorPane>
                                 <TextArea fx:id="messagesArea" editable="false" prefHeight="200.0" prefWidth="200.0" />
                             </children>
-                            <padding>
-                                <Insets bottom="5.0" right="5.0" top="5.0" />
-                            </padding>
                         </GridPane>
                     </children>
                     <padding>
