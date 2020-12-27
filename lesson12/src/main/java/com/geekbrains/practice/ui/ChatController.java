@@ -16,8 +16,6 @@ import java.util.ResourceBundle;
 
 public class ChatController implements Initializable {
   @FXML
-  private ImageView collapseButton;
-  @FXML
   private ImageView closeButton;
   @FXML
   private ImageView sendButton;
@@ -33,8 +31,7 @@ public class ChatController implements Initializable {
   public void initialize(URL location, ResourceBundle resources) {
     inputMessageField.requestFocus();
     sendButton.setImage(new Image("/assets/send_message.jpg"));
-    collapseButton.setImage(new Image("/assets/collapse_button.png"));
-    closeButton.setImage(new Image("/assets/close_button.png"));
+    closeButton.setImage(new Image("/assets/close_button.jpg"));
   }
 
   @FXML
@@ -79,20 +76,6 @@ public class ChatController implements Initializable {
   }
 
   public void onMouseClickedExit(MouseEvent mouseEvent) {
-    System.exit(0);
-  }
-
-  public void onMouseEnteredCollapse(MouseEvent mouseEvent) {
-    collapseButton.setScaleX(1.1);
-    collapseButton.setScaleY(1.1);
-  }
-
-  public void onMouseExitedCollapse(MouseEvent mouseEvent) {
-    collapseButton.setScaleX(1.0);
-    collapseButton.setScaleY(1.0);
-  }
-
-  public void onMouseClickedCollapse(MouseEvent mouseEvent) {
     System.exit(0);
   }
 }
