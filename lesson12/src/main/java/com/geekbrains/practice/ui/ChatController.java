@@ -10,12 +10,15 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ChatController implements Initializable {
+  @FXML
+  private AnchorPane bottomPane;
   @FXML
   private GridPane mainPane;
   @FXML
@@ -36,6 +39,7 @@ public class ChatController implements Initializable {
     Platform.runLater(() -> messagesArea.requestFocus());
     sendButton.setImage(new Image("/assets/send_message.jpg"));
     closeButton.setImage(new Image("/assets/close_button.jpg"));
+    bottomPane.setVisible(false);
   }
 
   @FXML

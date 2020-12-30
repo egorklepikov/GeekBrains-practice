@@ -5,10 +5,11 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<GridPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0"
-          prefWidth="1024.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
-          fx:controller="com.geekbrains.practice.ui.ChatController">
+<GridPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+          prefHeight="600.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/11.0.1"
+          xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.geekbrains.practice.ui.ChatController">
     <stylesheets>
         <URL value="@main_scene.css"/>
     </stylesheets>
@@ -31,6 +32,35 @@
             <padding>
                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
             </padding>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+                <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                    <TextArea fx:id="messagesArea" editable="false" prefHeight="575.0" prefWidth="770.0"/>
+                    <!--suppress JavaFxUnresolvedFxIdReference -->
+                    <AnchorPane fx:id="notificationLabelPane" layoutX="259.0" layoutY="239.0" prefHeight="27.0"
+                                prefWidth="260.0">
+                        <!--suppress JavaFxUnresolvedFxIdReference -->
+                        <Label fx:id="notificationLabel" alignment="CENTER" contentDisplay="CENTER"
+                               layoutX="-5.0" prefHeight="27.0" prefWidth="271.0"
+                               text="Select a chat to start messaging" AnchorPane.bottomAnchor="3.0"
+                               AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="3.0"
+                               AnchorPane.topAnchor="3.0">
+                            <font>
+                                <Font name="Consolas" size="12.0"/>
+                            </font>
+                        </Label>
+                    </AnchorPane>
+                </AnchorPane>
+                <AnchorPane fx:id="bottomPane" layoutY="470.0" prefHeight="105.0" prefWidth="770.0">
+                    <TextField fx:id="inputMessageField" layoutY="54.0" onKeyPressed="#sendMessageWithField"
+                               prefHeight="46.0" prefWidth="770.0" promptText="Write a message..."
+                               AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                               AnchorPane.topAnchor="54.0"/>
+                    <ImageView fx:id="sendButton" fitHeight="40.0" fitWidth="40.0" layoutX="716.0" layoutY="60.0"
+                               onMouseClicked="#clickedMouseListener" onMouseEntered="#enterMouseListener"
+                               onMouseExited="#exitMouseListener" pickOnBounds="true" preserveRatio="true"
+                               AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="60.0"/>
+                </AnchorPane>
+            </AnchorPane>
             <GridPane hgap="3.0" prefHeight="556.0" prefWidth="241.0" vgap="3.0">
                 <columnConstraints>
                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
@@ -53,32 +83,11 @@
                 </TextField>
                 <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1"/>
             </GridPane>
-            <GridPane prefHeight="605.0" prefWidth="770.0" GridPane.columnIndex="1">
-                <columnConstraints>
-                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-                </columnConstraints>
-                <rowConstraints>
-                    <RowConstraints maxHeight="531.0" minHeight="10.0" prefHeight="522.0" vgrow="SOMETIMES"/>
-                    <RowConstraints maxHeight="282.0" minHeight="10.0" prefHeight="53.0" vgrow="SOMETIMES"/>
-                </rowConstraints>
-                <AnchorPane prefHeight="99.0" prefWidth="770.0" GridPane.rowIndex="1">
-                    <TextField fx:id="inputMessageField" layoutY="19.0"
-                               onKeyPressed="#sendMessageWithField" prefHeight="45.0" prefWidth="765.0"
-                               promptText="Write a message..." AnchorPane.bottomAnchor="5.0"
-                               AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                               AnchorPane.topAnchor="12.0"/>
-                    <ImageView fx:id="sendButton" fitHeight="40.0" fitWidth="40.0" layoutX="706.0"
-                               layoutY="13.0" onMouseClicked="#clickedMouseListener"
-                               onMouseEntered="#enterMouseListener" onMouseExited="#exitMouseListener"
-                               pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="12.0"
-                               AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="15.0"/>
-                </AnchorPane>
-                <TextArea fx:id="messagesArea" editable="false" prefHeight="200.0" prefWidth="200.0"/>
-            </GridPane>
         </GridPane>
     </AnchorPane>
     <!--suppress JavaFxUnresolvedFxIdReference -->
-    <AnchorPane fx:id="topPane" prefHeight="200.0" prefWidth="200.0" onMousePressed="#onMousePressedTopPanel" onMouseDragged="#onMouseDraggedTopPanel">
+    <AnchorPane fx:id="topPane" onMouseDragged="#onMouseDraggedTopPanel" onMousePressed="#onMousePressedTopPanel"
+                prefHeight="200.0" prefWidth="200.0">
         <ImageView fx:id="closeButton" fitHeight="15.0" fitWidth="15.0" layoutX="1004.0" layoutY="7.0"
                    onMouseClicked="#onMouseClickedExit" onMouseEntered="#onMouseEnteredExit"
                    onMouseExited="#onMouseExitedExit" pickOnBounds="true" preserveRatio="true"

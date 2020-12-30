@@ -32,6 +32,18 @@
     -fx-font-family: Consolas;
 }
 
+#notificationLabelPane {
+    -fx-background-color: #2f343b;
+    -fx-background-radius: 12 12 12 12;
+    -fx-border-radius: 12 12 12 12;
+}
+
+#notificationLabel {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 13px;
+    -fx-font-family: Consolas;
+}
+
 .scroll-bar:horizontal .track,
 .scroll-bar:vertical .track {
     -fx-background-color: transparent;
