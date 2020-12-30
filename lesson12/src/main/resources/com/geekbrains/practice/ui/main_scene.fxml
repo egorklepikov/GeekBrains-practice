@@ -6,7 +6,7 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0"
+<GridPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0"
           prefWidth="1024.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
           fx:controller="com.geekbrains.practice.ui.ChatController">
     <stylesheets>
@@ -78,7 +78,7 @@
         </GridPane>
     </AnchorPane>
     <!--suppress JavaFxUnresolvedFxIdReference -->
-    <AnchorPane fx:id="topPane" prefHeight="200.0" prefWidth="200.0">
+    <AnchorPane fx:id="topPane" prefHeight="200.0" prefWidth="200.0" onMousePressed="#onMousePressedTopPanel" onMouseDragged="#onMouseDraggedTopPanel">
         <ImageView fx:id="closeButton" fitHeight="15.0" fitWidth="15.0" layoutX="1004.0" layoutY="7.0"
                    onMouseClicked="#onMouseClickedExit" onMouseEntered="#onMouseEnteredExit"
                    onMouseExited="#onMouseExitedExit" pickOnBounds="true" preserveRatio="true"
