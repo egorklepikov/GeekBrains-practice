@@ -85,11 +85,13 @@ public class ChatController implements Initializable {
     System.exit(0);
   }
 
+  @FXML
   public void onMousePressedTopPanel(MouseEvent mouseEvent) {
     xOffset = mainPane.getScene().getWindow().getX() - mouseEvent.getScreenX();
     yOffset = mainPane.getScene().getWindow().getY() - mouseEvent.getScreenY();
   }
 
+  @FXML
   public void onMouseDraggedTopPanel(MouseEvent mouseEvent) {
     mainPane.getScene().getWindow().setX(mouseEvent.getScreenX() + xOffset);
     mainPane.getScene().getWindow().setY(mouseEvent.getScreenY() + yOffset);
