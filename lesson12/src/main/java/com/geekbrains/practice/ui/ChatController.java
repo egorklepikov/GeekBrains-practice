@@ -1,5 +1,6 @@
 package com.geekbrains.practice.ui;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextArea;
@@ -32,7 +33,7 @@ public class ChatController implements Initializable {
   @FXML
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    inputMessageField.requestFocus();
+    Platform.runLater(() -> messagesArea.requestFocus());
     sendButton.setImage(new Image("/assets/send_message.jpg"));
     closeButton.setImage(new Image("/assets/close_button.jpg"));
   }
