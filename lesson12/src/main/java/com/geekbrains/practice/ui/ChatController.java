@@ -2,7 +2,9 @@ package com.geekbrains.practice.ui;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -12,11 +14,17 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ChatController implements Initializable {
+  @FXML
+  private AnchorPane notificationLabelPane;
+  @FXML
+  private VBox chats;
   @FXML
   private AnchorPane bottomPane;
   @FXML
@@ -36,10 +44,11 @@ public class ChatController implements Initializable {
   @FXML
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    Platform.runLater(() -> messagesArea.requestFocus());
     sendButton.setImage(new Image("/assets/send_message.jpg"));
     closeButton.setImage(new Image("/assets/close_button.jpg"));
     bottomPane.setVisible(false);
+    Platform.runLater(() -> messagesArea.requestFocus());
+    Platform.runLater(new ChatsListener());
   }
 
   @FXML
@@ -100,5 +109,31 @@ public class ChatController implements Initializable {
   public void onMouseDraggedTopPanel(MouseEvent mouseEvent) {
     mainPane.getScene().getWindow().setX(mouseEvent.getScreenX() + xOffset);
     mainPane.getScene().getWindow().setY(mouseEvent.getScreenY() + yOffset);
+  }
+
+  public AnchorPane getBottomPane() {
+    return bottomPane;
+  }
+
+  public AnchorPane getNotificationLabelPane() {
+    return notificationLabelPane;
+  }
+
+  private class ChatsListener implements Runnable {
+    @Override
+    public void run() {
+      for (FXMLLoader fxmlLoader : ChatsLoader.getInstance().loadChatsFXMLFragments()) {
+        try {
+          Node node = fxmlLoader.load();
+          if (fxmlLoader.getController() instanceof ChatFragment) {
+            ChatFragment chatFragment = fxmlLoader.getController();
+            chatFragment.setChatController(ChatController.this);
+          }
+          chats.getChildren().add(node);
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
+      }
+    }
   }
 }
