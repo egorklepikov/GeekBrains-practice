@@ -3,11 +3,13 @@ package com.geekbrains.practice.ui;
 import com.geekbrains.practice.model.Chat;
 import javafx.fxml.FXMLLoader;
 
+import java.util.ArrayList;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class ChatsLoader {
   private static ChatsLoader chatsLoader;
   private final CopyOnWriteArrayList<Chat> chats;
+  private int selectedChatIndex;
 
   private ChatsLoader() {
     chats = new CopyOnWriteArrayList<>();
@@ -25,11 +27,23 @@ public class ChatsLoader {
       Chat chat = new Chat(
         "Test" + i,
         null,
-        null,
+        new ArrayList<>(),
         new FXMLLoader(getClass().getResource("chat_fragment.fxml"))
       );
       chats.add(chat);
     }
     return chats;
+  }
+
+  public int getSelectedChatIndex() {
+    return selectedChatIndex;
+  }
+
+  public void setSelectedChatIndex(int selectedChatIndex) {
+    this.selectedChatIndex = selectedChatIndex;
+  }
+
+  public Chat getSelectedChat() {
+    return chats.get(selectedChatIndex);
   }
 }

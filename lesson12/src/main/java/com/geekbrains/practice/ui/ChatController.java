@@ -18,7 +18,6 @@ import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Iterator;
 import java.util.ResourceBundle;
 
 public class ChatController implements Initializable {
@@ -56,6 +55,9 @@ public class ChatController implements Initializable {
   public void sendMessageWithField(KeyEvent keyEvent) {
     if (keyEvent.getCode() == KeyCode.ENTER) {
       messagesArea.appendText(inputMessageField.getText() + "\n");
+      ChatsLoader.getInstance().getSelectedChat().getMessages().add(inputMessageField.getText());
+      ChatFragment chatFragment = ChatsLoader.getInstance().getSelectedChat().getFxmlLoader().getController();
+      chatFragment.setLastMessage(inputMessageField.getText());
       inputMessageField.clear();
       inputMessageField.requestFocus();
     } else if (keyEvent.getCode() == KeyCode.ESCAPE) {
@@ -79,6 +81,9 @@ public class ChatController implements Initializable {
   @FXML
   public void clickedMouseListener() {
     messagesArea.appendText(inputMessageField.getText() + "\n");
+    ChatsLoader.getInstance().getSelectedChat().getMessages().add(inputMessageField.getText());
+    ChatFragment chatFragment = ChatsLoader.getInstance().getSelectedChat().getFxmlLoader().getController();
+    chatFragment.setLastMessage(inputMessageField.getText());
     inputMessageField.clear();
     inputMessageField.requestFocus();
   }
@@ -118,6 +123,10 @@ public class ChatController implements Initializable {
 
   public AnchorPane getNotificationLabelPane() {
     return notificationLabelPane;
+  }
+
+  public TextArea getMessagesArea() {
+    return messagesArea;
   }
 
   private void loadChats() {

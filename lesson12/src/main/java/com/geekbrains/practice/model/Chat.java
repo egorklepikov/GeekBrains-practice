@@ -32,8 +32,8 @@ public class Chat {
   }
 
   public String getLastMessage() {
-    if (messages == null) {
-      return "null";
+    if (messages == null || messages.isEmpty()) {
+      return "";
     }
     return messages.get(messages.size() - 1);
   }

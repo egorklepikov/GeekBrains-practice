@@ -17,6 +17,8 @@ public class ChatFragment {
   @FXML
   private AnchorPane chatPane;
 
+  private Chat chat;
+
   private ChatController chatController;
   private int fragmentIndex;
 
@@ -35,7 +37,23 @@ public class ChatFragment {
   public void onChatSelected() {
     switchPanesVisibility();
     resetChatsStyle();
+    try {
+      addMessages();
+    } catch (IllegalArgumentException e) {
+      e.printStackTrace();
+    }
     chatPane.setStyle("-fx-background-color: #009587");
+    ChatsLoader.getInstance().setSelectedChatIndex(fragmentIndex);
+  }
+
+  private void addMessages() throws IllegalArgumentException {
+    chatController.getMessagesArea().setText("");
+    if (chat == null || chat.getMessages() == null) {
+      throw new IllegalArgumentException();
+    }
+    for (String message : chat.getMessages()) {
+      chatController.getMessagesArea().appendText(message + "\n");
+    }
   }
 
   private void switchPanesVisibility() {
@@ -53,8 +71,12 @@ public class ChatFragment {
   }
 
   public void initialize() {
-    Chat chat = ChatsLoader.getInstance().getChats().get(fragmentIndex);
+    chat = ChatsLoader.getInstance().getChats().get(fragmentIndex);
     lastMessage.setText(chat.getLastMessage());
     chatName.setText(chat.getChatName());
+  }
+
+  public void setLastMessage(String lastMessage) {
+    this.lastMessage.setText(lastMessage);
   }
 }
