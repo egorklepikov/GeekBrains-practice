@@ -41,10 +41,10 @@
                             </font>
                         </Label>
                     </AnchorPane>
-                </AnchorPane>
-                <AnchorPane fx:id="bottomPane" layoutY="470.0" prefHeight="105.0" prefWidth="770.0">
-                    <TextField fx:id="inputMessageField" layoutY="54.0" onKeyPressed="#sendMessageWithField" prefHeight="46.0" prefWidth="770.0" promptText="Write a message..." AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="54.0" />
-                    <ImageView fx:id="sendButton" fitHeight="40.0" fitWidth="40.0" layoutX="716.0" layoutY="60.0" onMouseClicked="#clickedMouseListener" onMouseEntered="#enterMouseListener" onMouseExited="#exitMouseListener" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="60.0" />
+                   <AnchorPane fx:id="bottomPane" layoutX="-6.0" layoutY="502.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="73.0" prefWidth="778.0">
+                       <TextField fx:id="inputMessageField" layoutX="8.0" onKeyPressed="#sendMessageWithField" prefHeight="67.0" prefWidth="770.0" promptText="Write a message..." AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="5.0" />
+                       <ImageView fx:id="sendButton" fitHeight="45.0" fitWidth="45.0" layoutX="724.0" layoutY="17.0" onMouseClicked="#clickedMouseListener" onMouseEntered="#enterMouseListener" onMouseExited="#exitMouseListener" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="16.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="17.0" />
+                   </AnchorPane>
                 </AnchorPane>
             </AnchorPane>
             <GridPane prefHeight="565.0" prefWidth="258.0">
