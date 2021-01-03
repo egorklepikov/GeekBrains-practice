@@ -49,7 +49,7 @@ public class ChatController implements Initializable {
     closeButton.setImage(new Image("/assets/close_button.jpg"));
     bottomPane.setVisible(false);
     Platform.runLater(() -> messagesArea.requestFocus());
-    Platform.runLater(new ChatsListener());
+    loadChats();
   }
 
   @FXML
@@ -120,24 +120,21 @@ public class ChatController implements Initializable {
     return notificationLabelPane;
   }
 
-  private class ChatsListener implements Runnable {
-    @Override
-    public void run() {
-      int fragmentIndex = 0;
-      for (Chat chat : ChatsLoader.getInstance().getChats()) {
-        try {
-          Node node = chat.getFxmlLoader().load();
-          if (chat.getFxmlLoader().getController() instanceof ChatFragment) {
-            ChatFragment chatFragment = chat.getFxmlLoader().getController();
-            chatFragment.setChatController(ChatController.this);
-            chatFragment.setFragmentIndex(fragmentIndex);
-            chatFragment.initialize();
-            fragmentIndex++;
-          }
-          chats.getChildren().add(node);
-        } catch (IOException e) {
-          e.printStackTrace();
+  private void loadChats() {
+    int fragmentIndex = 0;
+    for (Chat chat : ChatsLoader.getInstance().getChats()) {
+      try {
+        Node node = chat.getFxmlLoader().load();
+        if (chat.getFxmlLoader().getController() instanceof ChatFragment) {
+          ChatFragment chatFragment = chat.getFxmlLoader().getController();
+          chatFragment.setChatController(ChatController.this);
+          chatFragment.setFragmentIndex(fragmentIndex);
+          chatFragment.initialize();
+          fragmentIndex++;
         }
+        chats.getChildren().add(node);
+      } catch (IOException e) {
+        e.printStackTrace();
       }
     }
   }
