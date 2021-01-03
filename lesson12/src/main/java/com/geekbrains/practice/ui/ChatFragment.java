@@ -6,6 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
+
 public class ChatFragment {
   @FXML
   private Label lastMessage;
@@ -17,9 +18,14 @@ public class ChatFragment {
   private AnchorPane chatPane;
 
   private ChatController chatController;
+  private int fragmentIndex;
 
   public void setChatController(ChatController chatController) {
     this.chatController = chatController;
+  }
+
+  public void setFragmentIndex(int fragmentIndex) {
+    this.fragmentIndex = fragmentIndex;
   }
 
   public AnchorPane getChatPane() {
@@ -44,5 +50,11 @@ public class ChatFragment {
         chatFragment.getChatPane().setStyle("chat_fragment.css");
       }
     }
+  }
+
+  public void initialize() {
+    Chat chat = ChatsLoader.getInstance().getChats().get(fragmentIndex);
+    lastMessage.setText(chat.getLastMessage());
+    chatName.setText(chat.getChatName());
   }
 }

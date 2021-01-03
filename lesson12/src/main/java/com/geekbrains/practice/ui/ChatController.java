@@ -18,6 +18,7 @@ import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Iterator;
 import java.util.ResourceBundle;
 
 public class ChatController implements Initializable {
@@ -122,12 +123,16 @@ public class ChatController implements Initializable {
   private class ChatsListener implements Runnable {
     @Override
     public void run() {
+      int fragmentIndex = 0;
       for (Chat chat : ChatsLoader.getInstance().getChats()) {
         try {
           Node node = chat.getFxmlLoader().load();
           if (chat.getFxmlLoader().getController() instanceof ChatFragment) {
             ChatFragment chatFragment = chat.getFxmlLoader().getController();
             chatFragment.setChatController(ChatController.this);
+            chatFragment.setFragmentIndex(fragmentIndex);
+            chatFragment.initialize();
+            fragmentIndex++;
           }
           chats.getChildren().add(node);
         } catch (IOException e) {

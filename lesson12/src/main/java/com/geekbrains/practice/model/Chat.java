@@ -4,6 +4,7 @@ import javafx.fxml.FXMLLoader;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Chat {
   private final String chatName;
@@ -31,10 +32,26 @@ public class Chat {
   }
 
   public String getLastMessage() {
+    if (messages == null) {
+      return "null";
+    }
     return messages.get(messages.size() - 1);
   }
 
   public FXMLLoader getFxmlLoader() {
     return fxmlLoader;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    Chat chat = (Chat) o;
+    return Objects.equals(chatName, chat.chatName) && Objects.equals(chatIcon, chat.chatIcon) && Objects.equals(messages, chat.messages) && Objects.equals(fxmlLoader, chat.fxmlLoader);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(chatName, chatIcon, messages, fxmlLoader);
   }
 }
