@@ -34,6 +34,7 @@ public class ChatFragment {
     return chatPane;
   }
 
+  @FXML
   public void onChatSelected() {
     switchPanesVisibility();
     resetChatsStyle();
