@@ -43,6 +43,7 @@ public class ChatFragment {
       e.printStackTrace();
     }
     chatPane.setStyle("-fx-background-color: #009587");
+    lastMessage.setStyle("-fx-text-fill: #ffffff");
     ChatsLoader.getInstance().setSelectedChatIndex(fragmentIndex);
   }
 
@@ -66,6 +67,7 @@ public class ChatFragment {
       if (chat.getFxmlLoader().getController() instanceof ChatFragment) {
         ChatFragment chatFragment = chat.getFxmlLoader().getController();
         chatFragment.getChatPane().setStyle("chat_fragment.css");
+        chatFragment.getLastMessage().setStyle("chat_fragment.css");
       }
     }
   }
@@ -78,5 +80,9 @@ public class ChatFragment {
 
   public void setLastMessage(String lastMessage) {
     this.lastMessage.setText(lastMessage);
+  }
+
+  public Label getLastMessage() {
+    return lastMessage;
   }
 }
