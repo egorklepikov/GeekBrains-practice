@@ -1,8 +1,8 @@
 package com.geekbrains.practice.ui;
 
+import com.geekbrains.practice.model.Chat;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.TextArea;
@@ -122,11 +122,11 @@ public class ChatController implements Initializable {
   private class ChatsListener implements Runnable {
     @Override
     public void run() {
-      for (FXMLLoader fxmlLoader : ChatsLoader.getInstance().loadChatsFXMLFragments()) {
+      for (Chat chat : ChatsLoader.getInstance().getChats()) {
         try {
-          Node node = fxmlLoader.load();
-          if (fxmlLoader.getController() instanceof ChatFragment) {
-            ChatFragment chatFragment = fxmlLoader.getController();
+          Node node = chat.getFxmlLoader().load();
+          if (chat.getFxmlLoader().getController() instanceof ChatFragment) {
+            ChatFragment chatFragment = chat.getFxmlLoader().getController();
             chatFragment.setChatController(ChatController.this);
           }
           chats.getChildren().add(node);

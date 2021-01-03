@@ -1,7 +1,7 @@
 package com.geekbrains.practice.ui;
 
+import com.geekbrains.practice.model.Chat;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -38,9 +38,9 @@ public class ChatFragment {
   }
 
   private void resetChatsStyle() {
-    for (FXMLLoader fxmlLoader : ChatsLoader.getInstance().getChats()) {
-      if (fxmlLoader.getController() instanceof ChatFragment) {
-        ChatFragment chatFragment = fxmlLoader.getController();
+    for (Chat chat : ChatsLoader.getInstance().getChats()) {
+      if (chat.getFxmlLoader().getController() instanceof ChatFragment) {
+        ChatFragment chatFragment = chat.getFxmlLoader().getController();
         chatFragment.getChatPane().setStyle("chat_fragment.css");
       }
     }
