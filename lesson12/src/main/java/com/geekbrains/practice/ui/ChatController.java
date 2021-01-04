@@ -1,5 +1,6 @@
 package com.geekbrains.practice.ui;
 
+import com.geekbrains.practice.logic.ChatsLoader;
 import com.geekbrains.practice.model.Chat;
 import javafx.application.Platform;
 import javafx.fxml.FXML;

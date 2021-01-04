@@ -1,4 +1,4 @@
-package com.geekbrains.practice.ui;
+package com.geekbrains.practice.logic;
 
 import com.geekbrains.practice.model.Chat;
 import javafx.fxml.FXMLLoader;
