@@ -5,6 +5,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -21,6 +22,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ChatController implements Initializable {
+  @FXML
+  private ScrollPane scrollVBoxPane;
   @FXML
   private ImageView newChatButton;
   @FXML
@@ -50,6 +53,9 @@ public class ChatController implements Initializable {
     closeButton.setImage(new Image("/assets/close_button.jpg"));
     newChatButton.setImage(new Image("/assets/new_chat.jpg"));
     bottomPane.setVisible(false);
+    scrollVBoxPane.setFitToWidth(true);
+    scrollVBoxPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+    scrollVBoxPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
     Platform.runLater(() -> messagesArea.requestFocus());
     ChatsLoader.getInstance().loadChats();
     addChatsToVBox();
