@@ -74,7 +74,7 @@
                 </AnchorPane>
                 <ScrollPane fx:id="scrollVBoxPane" hbarPolicy="NEVER" prefHeight="444.0" prefWidth="241.0" GridPane.rowIndex="1">
                     <content>
-                        <VBox fx:id="chats" prefHeight="298.0" prefWidth="239.0" />
+                        <VBox fx:id="chats" prefHeight="529.0" prefWidth="239.0" />
                     </content>
                 </ScrollPane>
             </GridPane>

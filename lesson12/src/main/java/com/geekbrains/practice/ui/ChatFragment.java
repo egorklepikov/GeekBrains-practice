@@ -3,7 +3,6 @@ package com.geekbrains.practice.ui;
 import com.geekbrains.practice.model.Chat;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
 
@@ -12,8 +11,6 @@ public class ChatFragment {
   private Label lastMessage;
   @FXML
   private Label chatName;
-  @FXML
-  private ImageView chatIcon;
   @FXML
   private AnchorPane chatPane;
 

@@ -1,20 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.image.ImageView?>
+<?import java.net.*?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import java.net.URL?>
-<AnchorPane fx:id="chatPane" onMouseClicked="#onChatSelected" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="235.0"
-            xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.geekbrains.practice.ui.ChatFragment">
+
+<AnchorPane fx:id="chatPane" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#onChatSelected" prefHeight="50.0" prefWidth="235.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.geekbrains.practice.ui.ChatFragment">
     <stylesheets>
-        <URL value="@chat_fragment.css"/>
+        <URL value="@chat_fragment.css" />
     </stylesheets>
-    <ImageView fx:id="chatIcon" fitHeight="40.0" fitWidth="40.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true"
-               AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="195.0"
-               AnchorPane.topAnchor="3.0"/>
-    <Label fx:id="chatName" layoutX="45.0" layoutY="6.0" prefHeight="17.0" prefWidth="190.0" text="Chat name"
-           AnchorPane.bottomAnchor="28.0" AnchorPane.leftAnchor="47.0" AnchorPane.rightAnchor="5.0"
-           AnchorPane.topAnchor="5.0"/>
-    <Label fx:id="lastMessage" layoutX="47.0" layoutY="28.0" prefHeight="17.0" prefWidth="183.0" text="Last message"/>
+    <Label fx:id="chatName" layoutX="14.0" layoutY="6.0" prefHeight="17.0" prefWidth="215.0" text="Chat name" AnchorPane.bottomAnchor="27.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="6.0" />
+    <Label fx:id="lastMessage" layoutX="14.0" layoutY="28.0" prefHeight="17.0" prefWidth="215.0" text="Last message" />
 </AnchorPane>
