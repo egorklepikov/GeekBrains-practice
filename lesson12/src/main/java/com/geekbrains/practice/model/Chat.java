@@ -23,10 +23,6 @@ public class Chat {
     return chatName;
   }
 
-  public Image getChatIcon() {
-    return chatIcon;
-  }
-
   public ArrayList<String> getMessages() {
     return messages;
   }

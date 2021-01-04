@@ -41,10 +41,6 @@ public class ChatsLoader {
     return chat;
   }
 
-  public int getSelectedChatIndex() {
-    return selectedChatIndex;
-  }
-
   public void setSelectedChatIndex(int selectedChatIndex) {
     this.selectedChatIndex = selectedChatIndex;
   }
