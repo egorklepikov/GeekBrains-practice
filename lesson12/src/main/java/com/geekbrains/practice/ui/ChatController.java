@@ -64,6 +64,7 @@ public class ChatController implements Initializable {
       chatFragment.setLastMessage(inputMessageField.getText());
       inputMessageField.clear();
       inputMessageField.requestFocus();
+      //TODO some network staff
     } else if (keyEvent.getCode() == KeyCode.ESCAPE) {
       inputMessageField.clear();
       inputMessageField.requestFocus();
@@ -90,6 +91,7 @@ public class ChatController implements Initializable {
     chatFragment.setLastMessage(inputMessageField.getText());
     inputMessageField.clear();
     inputMessageField.requestFocus();
+    //TODO some network staff
   }
 
   @FXML
@@ -163,6 +165,7 @@ public class ChatController implements Initializable {
       ChatsLoader.getInstance().addNewChat(),
       ChatsLoader.getInstance().getChats().size() - 1
     );
+    //TODO some network staff
   }
 
   public void enterMouseNewChatListener() {
