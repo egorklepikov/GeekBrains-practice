@@ -22,17 +22,23 @@ public class ChatsLoader {
     return chatsLoader;
   }
 
+  public void loadChats() {
+    //TODO some network staff
+  }
+
   public CopyOnWriteArrayList<Chat> getChats() {
-    for (int i = 0; i < 10; i++) {
-      Chat chat = new Chat(
-        "Test" + i,
-        null,
-        new ArrayList<>(),
-        new FXMLLoader(getClass().getResource("chat_fragment.fxml"))
-      );
-      chats.add(chat);
-    }
     return chats;
+  }
+
+  public Chat addNewChat() {
+    Chat chat = new Chat(
+      "TEST",
+      null,
+      new ArrayList<>(),
+      new FXMLLoader(getClass().getResource("chat_fragment.fxml"))
+    );
+    chats.add(chat);
+    return chat;
   }
 
   public int getSelectedChatIndex() {

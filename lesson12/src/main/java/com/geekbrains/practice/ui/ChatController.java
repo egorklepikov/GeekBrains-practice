@@ -22,6 +22,8 @@ import java.util.ResourceBundle;
 
 public class ChatController implements Initializable {
   @FXML
+  private ImageView newChatButton;
+  @FXML
   private AnchorPane notificationLabelPane;
   @FXML
   private VBox chats;
@@ -46,9 +48,11 @@ public class ChatController implements Initializable {
   public void initialize(URL location, ResourceBundle resources) {
     sendButton.setImage(new Image("/assets/send_message.jpg"));
     closeButton.setImage(new Image("/assets/close_button.jpg"));
+    newChatButton.setImage(new Image("/assets/new_chat.jpg"));
     bottomPane.setVisible(false);
     Platform.runLater(() -> messagesArea.requestFocus());
-    loadChats();
+    ChatsLoader.getInstance().loadChats();
+    addChatsToVBox();
   }
 
   @FXML
@@ -129,22 +133,45 @@ public class ChatController implements Initializable {
     return messagesArea;
   }
 
-  private void loadChats() {
+  private void addChatsToVBox() {
     int fragmentIndex = 0;
+    chats.getChildren().clear();
     for (Chat chat : ChatsLoader.getInstance().getChats()) {
-      try {
-        Node node = chat.getFxmlLoader().load();
-        if (chat.getFxmlLoader().getController() instanceof ChatFragment) {
-          ChatFragment chatFragment = chat.getFxmlLoader().getController();
-          chatFragment.setChatController(ChatController.this);
-          chatFragment.setFragmentIndex(fragmentIndex);
-          chatFragment.initialize();
-          fragmentIndex++;
-        }
-        chats.getChildren().add(node);
-      } catch (IOException e) {
-        e.printStackTrace();
-      }
+      fragmentIndex = addChatFragment(chat, fragmentIndex);
     }
+  }
+
+  private int addChatFragment(Chat chat, int fragmentIndex) {
+    try {
+      Node node = chat.getFxmlLoader().load();
+      if (chat.getFxmlLoader().getController() instanceof ChatFragment) {
+        ChatFragment chatFragment = chat.getFxmlLoader().getController();
+        chatFragment.setChatController(ChatController.this);
+        chatFragment.setFragmentIndex(fragmentIndex);
+        chatFragment.initialize();
+        fragmentIndex++;
+      }
+      chats.getChildren().add(node);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    return fragmentIndex;
+  }
+
+  public void clickedMouseNewChatListener() {
+    addChatFragment(
+      ChatsLoader.getInstance().addNewChat(),
+      ChatsLoader.getInstance().getChats().size() - 1
+    );
+  }
+
+  public void enterMouseNewChatListener() {
+    newChatButton.setScaleX(1.1);
+    newChatButton.setScaleY(1.1);
+  }
+
+  public void exitMouseNewChatListener() {
+    newChatButton.setScaleX(1);
+    newChatButton.setScaleY(1);
   }
 }

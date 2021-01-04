@@ -58,13 +58,18 @@
                 <opaqueInsets>
                     <Insets />
                 </opaqueInsets>
-                <!--suppress JavaFxUnresolvedFxIdReference -->
-                <TextField fx:id="searchField" prefHeight="20.0" prefWidth="235.0" promptText="Search">
-                    <padding>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                    </padding>
-                </TextField>
                 <VBox fx:id="chats" prefHeight="526.0" prefWidth="242.0" GridPane.rowIndex="1" />
+            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                      <!--suppress JavaFxUnresolvedFxIdReference -->
+                      <TextField fx:id="searchField" layoutX="57.0" layoutY="20.0" prefHeight="37.0" prefWidth="184.0" promptText="Search" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="2.0">
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                      </TextField>
+                  <ImageView fx:id="newChatButton" onMouseClicked="#clickedMouseNewChatListener" onMouseEntered="#enterMouseNewChatListener" onMouseExited="#exitMouseNewChatListener" fitHeight="23.0" fitWidth="23.0" layoutX="2.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="2.0" AnchorPane.topAnchor="5.0" />
+               </children>
+            </AnchorPane>
             </GridPane>
         </GridPane>
     </AnchorPane>
