@@ -49,7 +49,7 @@ public class ChatController implements Initializable {
   @FXML
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    sendButton.setImage(new Image("/assets/send_message.jpg"));
+    sendButton.setImage(new Image("/assets/send_message.png"));
     closeButton.setImage(new Image("/assets/close_button.jpg"));
     newChatButton.setImage(new Image("/assets/new_chat.jpg"));
     bottomPane.setVisible(false);
