@@ -12,6 +12,7 @@
     <bytecodeTargetLevel>
       <module name="chat-frontend" target="8" />
       <module name="lesson15" target="8" />
+      <module name="lesson16" target="11" />
     </bytecodeTargetLevel>
   </component>
 </project>
