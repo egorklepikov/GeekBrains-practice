@@ -10,7 +10,6 @@ public class MainClass {
     System.out.println("ВАЖНОЕ ОБЪЯВЛЕНИЕ >>> Подготовка!!!");
     Race race = new Race(new Road(60), new Tunnel(), new Road(40));
     CountDownLatch countDownLatch = new CountDownLatch(CARS_COUNT);
-
     Car[] cars = new Car[CARS_COUNT];
     for (int i = 0; i < cars.length; i++) {
       cars[i] = new Car(race, 20 + (int) (Math.random() * 10), countDownLatch);
