@@ -1,7 +1,10 @@
 package com.geekbrains.practice;
 
+import java.util.concurrent.CountDownLatch;
+
 public class Car implements Runnable {
   private static int CARS_COUNT;
+  private CountDownLatch countDownLatch;
 
   static {
     CARS_COUNT = 0;
@@ -19,7 +22,8 @@ public class Car implements Runnable {
     return speed;
   }
 
-  public Car(Race race, int speed) {
+  public Car(Race race, int speed, CountDownLatch countDownLatch) {
+    this.countDownLatch = countDownLatch;
     this.race = race;
     this.speed = speed;
     CARS_COUNT++;
@@ -31,8 +35,14 @@ public class Car implements Runnable {
     try {
       System.out.println(this.name + " готовится");
       Thread.sleep(500 + (int) (Math.random() * 800));
+      countDownLatch.countDown();
       System.out.println(this.name + " готов");
     } catch (Exception e) {
+      e.printStackTrace();
+    }
+    try {
+      countDownLatch.await();
+    } catch (InterruptedException e) {
       e.printStackTrace();
     }
     for (int i = 0; i < race.getStages().size(); i++) {
