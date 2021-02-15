@@ -12,8 +12,8 @@ import static org.junit.Assert.assertArrayEquals;
 
 @RunWith(Parameterized.class)
 public class HomeworkImplementationExecutionTest {
-  private int[] expectedArray;
-  private int[] actualArray;
+  private final int[] expectedArray;
+  private final int[] actualArray;
   private static HomeworkImplementation homeworkImplementation;
 
   @BeforeClass
