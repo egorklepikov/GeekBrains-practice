@@ -3,7 +3,7 @@ package com.geekbrains.practice;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class HomeworkImplementationTestInputs {
+public class HomeworkImplementationTestConversionInputs {
   private static HomeworkImplementation homeworkImplementation;
 
   @BeforeClass

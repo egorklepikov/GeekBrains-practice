@@ -11,7 +11,7 @@ import java.util.Collection;
 import static org.junit.Assert.assertArrayEquals;
 
 @RunWith(Parameterized.class)
-public class HomeworkImplementationExecutionTest {
+public class HomeworkImplementationConversionExecutionTest {
   private final int[] expectedArray;
   private final int[] actualArray;
   private static HomeworkImplementation homeworkImplementation;
@@ -21,7 +21,7 @@ public class HomeworkImplementationExecutionTest {
     homeworkImplementation = new HomeworkImplementation();
   }
 
-  public HomeworkImplementationExecutionTest(int[] expectedArray, int[] actualArray) {
+  public HomeworkImplementationConversionExecutionTest(int[] expectedArray, int[] actualArray) {
     this.expectedArray = expectedArray;
     this.actualArray = actualArray;
   }
