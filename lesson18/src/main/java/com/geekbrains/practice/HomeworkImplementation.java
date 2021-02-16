@@ -26,4 +26,19 @@ public class HomeworkImplementation {
     }
     return resultArray;
   }
+
+  public boolean isArrayCorrect(int[] array) {
+    boolean isOnePresented = false;
+    boolean isFourPresented = false;
+    for (int arrElement : array) {
+      if (arrElement == 1) {
+        isOnePresented = true;
+      } else if (arrElement == 4) {
+        isFourPresented = true;
+      } else {
+        return false;
+      }
+    }
+    return isOnePresented && isFourPresented;
+  }
 }
